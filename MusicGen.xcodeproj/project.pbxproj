@@ -3,27 +3,128 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2D78242683926D0086F44C /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D78232683926D0086F44C /* Instruments.swift */; };
+		0A42BD74268B0D4E00F3A9F0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BD73268B0D4E00F3A9F0 /* API.swift */; };
+		0A42BD76268B0F8300F3A9F0 /* MusicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BD75268B0F8300F3A9F0 /* MusicModel.swift */; };
+		0A45260426971EFE0098111A /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45260326971EFE0098111A /* ResponseModel.swift */; };
+		0A4B007626B3E47700E4AD64 /* gilroy-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A4B007526B3E47700E4AD64 /* gilroy-semibold.ttf */; };
+		0A4B00C826C79A20004C4E5C /* CreateMidi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B00C726C79A20004C4E5C /* CreateMidi.swift */; };
+		0A4B00CA26C79A77004C4E5C /* CreateMidis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B00C926C79A77004C4E5C /* CreateMidis.swift */; };
+		0A568FAE26B8248E0020DC46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A568FAD26B8248E0020DC46 /* SettingsViewController.swift */; };
+		0A57EA01268488470040A7A8 /* Gilroy-FREE in Resources */ = {isa = PBXBuildFile; fileRef = 0A57EA00268488470040A7A8 /* Gilroy-FREE */; };
+		0A57EA032684A1BC0040A7A8 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57EA022684A1BC0040A7A8 /* Genres.swift */; };
+		0A57EA052684D16F0040A7A8 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57EA042684D16F0040A7A8 /* DonateViewController.swift */; };
+		0A57EA072684DCA30040A7A8 /* PaymentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57EA062684DCA30040A7A8 /* PaymentDetailsViewController.swift */; };
+		0A593322267223FC0060EEE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A593321267223FC0060EEE0 /* User.swift */; };
+		0A593325267268BF0060EEE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A593324267268BF0060EEE0 /* Constants.swift */; };
+		0A59332726726AC40060EEE0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59332626726AC40060EEE0 /* HeaderView.swift */; };
 		0A6190302672020B00A001E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61902F2672020B00A001E1 /* AppDelegate.swift */; };
 		0A6190322672020B00A001E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6190312672020B00A001E1 /* SceneDelegate.swift */; };
-		0A6190342672020B00A001E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6190332672020B00A001E1 /* ViewController.swift */; };
+		0A6190342672020B00A001E1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6190332672020B00A001E1 /* MainViewController.swift */; };
 		0A6190372672020B00A001E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A6190352672020B00A001E1 /* Main.storyboard */; };
 		0A6190392672020D00A001E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6190382672020D00A001E1 /* Assets.xcassets */; };
 		0A61903C2672020D00A001E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A61903A2672020D00A001E1 /* LaunchScreen.storyboard */; };
+		0A6190442672038F00A001E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6190432672038F00A001E1 /* LoginViewController.swift */; };
+		0A619046267206BC00A001E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A619045267206BC00A001E1 /* GoogleService-Info.plist */; };
+		0A61904826720D2000A001E1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61904726720D2000A001E1 /* SignUpViewController.swift */; };
+		0A61904B26720D9400A001E1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61904A26720D9400A001E1 /* Extensions.swift */; };
+		0A61904E26720E3F00A001E1 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61904D26720E3F00A001E1 /* AuthButton.swift */; };
+		0A61905126720F6300A001E1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61905026720F6300A001E1 /* Service.swift */; };
+		0A63632226B9916000F324CC /* gilroy-ultralightitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631026B9916000F324CC /* gilroy-ultralightitalic.ttf */; };
+		0A63632326B9916000F324CC /* gilroy-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631126B9916000F324CC /* gilroy-medium.ttf */; };
+		0A63632426B9916000F324CC /* gilroy-lightitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631226B9916000F324CC /* gilroy-lightitalic.ttf */; };
+		0A63632526B9916000F324CC /* gilroy-thinitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631326B9916000F324CC /* gilroy-thinitalic.ttf */; };
+		0A63632626B9916000F324CC /* gilroy-heavyitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631426B9916000F324CC /* gilroy-heavyitalic.ttf */; };
+		0A63632726B9916000F324CC /* gilroy-bolditalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631526B9916000F324CC /* gilroy-bolditalic.ttf */; };
+		0A63632826B9916000F324CC /* gilroy-semibolditalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631626B9916000F324CC /* gilroy-semibolditalic.ttf */; };
+		0A63632926B9916000F324CC /* gilroy-regularitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631726B9916000F324CC /* gilroy-regularitalic.ttf */; };
+		0A63632A26B9916000F324CC /* gilroy-blackitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631826B9916000F324CC /* gilroy-blackitalic.ttf */; };
+		0A63632B26B9916000F324CC /* gilroy-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631926B9916000F324CC /* gilroy-regular.ttf */; };
+		0A63632C26B9916000F324CC /* gilroy-ultralight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631A26B9916000F324CC /* gilroy-ultralight.ttf */; };
+		0A63632D26B9916000F324CC /* gilroy-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631B26B9916000F324CC /* gilroy-black.ttf */; };
+		0A63632E26B9916000F324CC /* gilroy-mediumitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631C26B9916000F324CC /* gilroy-mediumitalic.ttf */; };
+		0A63632F26B9916000F324CC /* gilroy-thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631D26B9916000F324CC /* gilroy-thin.ttf */; };
+		0A63633026B9916000F324CC /* gilroy-extrabolditalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631E26B9916000F324CC /* gilroy-extrabolditalic.ttf */; };
+		0A63633126B9916000F324CC /* gilroy-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63631F26B9916000F324CC /* gilroy-semibold.ttf */; };
+		0A63633226B9916000F324CC /* gilroy-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63632026B9916000F324CC /* gilroy-bold.ttf */; };
+		0A63633326B9916000F324CC /* gilroy-heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63632126B9916000F324CC /* gilroy-heavy.ttf */; };
+		0A63633926B9937400F324CC /* Radomir Tinkov - Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63633726B9937400F324CC /* Radomir Tinkov - Gilroy-Light.otf */; };
+		0A63633A26B9937400F324CC /* Radomir Tinkov - Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A63633826B9937400F324CC /* Radomir Tinkov - Gilroy-ExtraBold.otf */; };
+		0A773DC426B43F4F00F2327D /* SpinnerLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A773DC326B43F4F00F2327D /* SpinnerLoaderView.swift */; };
+		0A77D488269D88C30080167B /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A77D487269D88C30080167B /* AudioPlayerView.swift */; };
+		0AAB840726BA764000E360BC /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB840626BA764000E360BC /* HelperFunctions.swift */; };
+		0AE636DB26A7EE0E004D7182 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE636DA26A7EE0E004D7182 /* AppHelper.swift */; };
+		0AE636DD26A7EEF4004D7182 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE636DC26A7EEF4004D7182 /* IAPHelper.swift */; };
+		0AE636E026A7EF22004D7182 /* RazeFaceProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE636DF26A7EF22004D7182 /* RazeFaceProducts.swift */; };
+		0AE636E226A80150004D7182 /* InstrumentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE636E126A80150004D7182 /* InstrumentsCollectionViewCell.swift */; };
+		87B407B3037D5ABF6AAFEE93 /* Pods_MusicGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F7EA54859A99BFA91E47E0 /* Pods_MusicGen.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2D78232683926D0086F44C /* Instruments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
+		0A42BD73268B0D4E00F3A9F0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0A42BD75268B0F8300F3A9F0 /* MusicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModel.swift; sourceTree = "<group>"; };
+		0A45260326971EFE0098111A /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
+		0A4B007526B3E47700E4AD64 /* gilroy-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-semibold.ttf"; path = "MusicGen/gilroyFont/gilroy-semibold.ttf"; sourceTree = SOURCE_ROOT; };
+		0A4B00C726C79A20004C4E5C /* CreateMidi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMidi.swift; sourceTree = "<group>"; };
+		0A4B00C926C79A77004C4E5C /* CreateMidis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMidis.swift; sourceTree = "<group>"; };
+		0A568FAD26B8248E0020DC46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		0A57EA00268488470040A7A8 /* Gilroy-FREE */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Gilroy-FREE"; sourceTree = "<group>"; };
+		0A57EA022684A1BC0040A7A8 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		0A57EA042684D16F0040A7A8 /* DonateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
+		0A57EA062684DCA30040A7A8 /* PaymentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDetailsViewController.swift; sourceTree = "<group>"; };
+		0A593321267223FC0060EEE0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0A59332326724DBC0060EEE0 /* MusicGen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicGen.entitlements; sourceTree = "<group>"; };
+		0A593324267268BF0060EEE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0A59332626726AC40060EEE0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		0A61902C2672020B00A001E1 /* MusicGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A61902F2672020B00A001E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A6190312672020B00A001E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0A6190332672020B00A001E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0A6190332672020B00A001E1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0A6190362672020B00A001E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A6190382672020D00A001E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A61903B2672020D00A001E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A61903D2672020D00A001E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A6190432672038F00A001E1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0A619045267206BC00A001E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		0A61904726720D2000A001E1 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		0A61904A26720D9400A001E1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0A61904D26720E3F00A001E1 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		0A61905026720F6300A001E1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		0A63631026B9916000F324CC /* gilroy-ultralightitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-ultralightitalic.ttf"; sourceTree = "<group>"; };
+		0A63631126B9916000F324CC /* gilroy-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-medium.ttf"; sourceTree = "<group>"; };
+		0A63631226B9916000F324CC /* gilroy-lightitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-lightitalic.ttf"; sourceTree = "<group>"; };
+		0A63631326B9916000F324CC /* gilroy-thinitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-thinitalic.ttf"; sourceTree = "<group>"; };
+		0A63631426B9916000F324CC /* gilroy-heavyitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-heavyitalic.ttf"; sourceTree = "<group>"; };
+		0A63631526B9916000F324CC /* gilroy-bolditalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-bolditalic.ttf"; sourceTree = "<group>"; };
+		0A63631626B9916000F324CC /* gilroy-semibolditalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-semibolditalic.ttf"; sourceTree = "<group>"; };
+		0A63631726B9916000F324CC /* gilroy-regularitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-regularitalic.ttf"; sourceTree = "<group>"; };
+		0A63631826B9916000F324CC /* gilroy-blackitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-blackitalic.ttf"; sourceTree = "<group>"; };
+		0A63631926B9916000F324CC /* gilroy-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-regular.ttf"; sourceTree = "<group>"; };
+		0A63631A26B9916000F324CC /* gilroy-ultralight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-ultralight.ttf"; sourceTree = "<group>"; };
+		0A63631B26B9916000F324CC /* gilroy-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-black.ttf"; sourceTree = "<group>"; };
+		0A63631C26B9916000F324CC /* gilroy-mediumitalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-mediumitalic.ttf"; sourceTree = "<group>"; };
+		0A63631D26B9916000F324CC /* gilroy-thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-thin.ttf"; sourceTree = "<group>"; };
+		0A63631E26B9916000F324CC /* gilroy-extrabolditalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-extrabolditalic.ttf"; sourceTree = "<group>"; };
+		0A63631F26B9916000F324CC /* gilroy-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-semibold.ttf"; sourceTree = "<group>"; };
+		0A63632026B9916000F324CC /* gilroy-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-bold.ttf"; sourceTree = "<group>"; };
+		0A63632126B9916000F324CC /* gilroy-heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-heavy.ttf"; sourceTree = "<group>"; };
+		0A63633726B9937400F324CC /* Radomir Tinkov - Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radomir Tinkov - Gilroy-Light.otf"; sourceTree = "<group>"; };
+		0A63633826B9937400F324CC /* Radomir Tinkov - Gilroy-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radomir Tinkov - Gilroy-ExtraBold.otf"; sourceTree = "<group>"; };
+		0A773DC326B43F4F00F2327D /* SpinnerLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerLoaderView.swift; sourceTree = "<group>"; };
+		0A77D487269D88C30080167B /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
+		0AAB840626BA764000E360BC /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		0AE636DA26A7EE0E004D7182 /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		0AE636DC26A7EEF4004D7182 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		0AE636DF26A7EF22004D7182 /* RazeFaceProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RazeFaceProducts.swift; sourceTree = "<group>"; };
+		0AE636E126A80150004D7182 /* InstrumentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentsCollectionViewCell.swift; sourceTree = "<group>"; };
+		80DCCD87C101578BE7B227A1 /* Pods-MusicGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicGen.release.xcconfig"; path = "Target Support Files/Pods-MusicGen/Pods-MusicGen.release.xcconfig"; sourceTree = "<group>"; };
+		91F7EA54859A99BFA91E47E0 /* Pods_MusicGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F530327F24A89C087F897A1B /* Pods-MusicGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicGen.debug.xcconfig"; path = "Target Support Files/Pods-MusicGen/Pods-MusicGen.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +132,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87B407B3037D5ABF6AAFEE93 /* Pods_MusicGen.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A593320267223B70060EEE0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0A593321267223FC0060EEE0 /* User.swift */,
+				0A2D78232683926D0086F44C /* Instruments.swift */,
+				0A4B007526B3E47700E4AD64 /* gilroy-semibold.ttf */,
+				0A57EA022684A1BC0040A7A8 /* Genres.swift */,
+				0A42BD75268B0F8300F3A9F0 /* MusicModel.swift */,
+				0A4B00C726C79A20004C4E5C /* CreateMidi.swift */,
+				0A4B00C926C79A77004C4E5C /* CreateMidis.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0A6190232672020B00A001E1 = {
 			isa = PBXGroup;
 			children = (
 				0A61902E2672020B00A001E1 /* MusicGen */,
 				0A61902D2672020B00A001E1 /* Products */,
+				1D49E80DACE404AD255330DE /* Pods */,
+				629B9870373225FCF2AE9EF8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +174,123 @@
 		0A61902E2672020B00A001E1 /* MusicGen */ = {
 			isa = PBXGroup;
 			children = (
+				0AE636D926A7EDF6004D7182 /* Helpers */,
+				0A59332326724DBC0060EEE0 /* MusicGen.entitlements */,
+				0A63633626B9937400F324CC /* gilroy */,
+				0A63630F26B9916000F324CC /* gilroyFont */,
+				0A57EA00268488470040A7A8 /* Gilroy-FREE */,
+				0A593320267223B70060EEE0 /* Models */,
+				0A61904F26720F4F00A001E1 /* Service */,
+				0A61904C26720E2E00A001E1 /* Views */,
+				0A61904926720D7A00A001E1 /* Utils */,
 				0A61902F2672020B00A001E1 /* AppDelegate.swift */,
 				0A6190312672020B00A001E1 /* SceneDelegate.swift */,
-				0A6190332672020B00A001E1 /* ViewController.swift */,
+				0A568FAD26B8248E0020DC46 /* SettingsViewController.swift */,
+				0A6190332672020B00A001E1 /* MainViewController.swift */,
+				0AE636E126A80150004D7182 /* InstrumentsCollectionViewCell.swift */,
+				0A77D487269D88C30080167B /* AudioPlayerView.swift */,
+				0A6190432672038F00A001E1 /* LoginViewController.swift */,
+				0A61904726720D2000A001E1 /* SignUpViewController.swift */,
+				0A57EA042684D16F0040A7A8 /* DonateViewController.swift */,
+				0A57EA062684DCA30040A7A8 /* PaymentDetailsViewController.swift */,
 				0A6190352672020B00A001E1 /* Main.storyboard */,
 				0A6190382672020D00A001E1 /* Assets.xcassets */,
 				0A61903A2672020D00A001E1 /* LaunchScreen.storyboard */,
 				0A61903D2672020D00A001E1 /* Info.plist */,
+				0A619045267206BC00A001E1 /* GoogleService-Info.plist */,
 			);
 			path = MusicGen;
+			sourceTree = "<group>";
+		};
+		0A61904926720D7A00A001E1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0A61904A26720D9400A001E1 /* Extensions.swift */,
+				0A593324267268BF0060EEE0 /* Constants.swift */,
+				0A42BD73268B0D4E00F3A9F0 /* API.swift */,
+				0A45260326971EFE0098111A /* ResponseModel.swift */,
+				0A773DC326B43F4F00F2327D /* SpinnerLoaderView.swift */,
+				0AAB840626BA764000E360BC /* HelperFunctions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0A61904C26720E2E00A001E1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A61904D26720E3F00A001E1 /* AuthButton.swift */,
+				0A59332626726AC40060EEE0 /* HeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0A61904F26720F4F00A001E1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0A61905026720F6300A001E1 /* Service.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0A63630F26B9916000F324CC /* gilroyFont */ = {
+			isa = PBXGroup;
+			children = (
+				0A63631026B9916000F324CC /* gilroy-ultralightitalic.ttf */,
+				0A63631126B9916000F324CC /* gilroy-medium.ttf */,
+				0A63631226B9916000F324CC /* gilroy-lightitalic.ttf */,
+				0A63631326B9916000F324CC /* gilroy-thinitalic.ttf */,
+				0A63631426B9916000F324CC /* gilroy-heavyitalic.ttf */,
+				0A63631526B9916000F324CC /* gilroy-bolditalic.ttf */,
+				0A63631626B9916000F324CC /* gilroy-semibolditalic.ttf */,
+				0A63631726B9916000F324CC /* gilroy-regularitalic.ttf */,
+				0A63631826B9916000F324CC /* gilroy-blackitalic.ttf */,
+				0A63631926B9916000F324CC /* gilroy-regular.ttf */,
+				0A63631A26B9916000F324CC /* gilroy-ultralight.ttf */,
+				0A63631B26B9916000F324CC /* gilroy-black.ttf */,
+				0A63631C26B9916000F324CC /* gilroy-mediumitalic.ttf */,
+				0A63631D26B9916000F324CC /* gilroy-thin.ttf */,
+				0A63631E26B9916000F324CC /* gilroy-extrabolditalic.ttf */,
+				0A63631F26B9916000F324CC /* gilroy-semibold.ttf */,
+				0A63632026B9916000F324CC /* gilroy-bold.ttf */,
+				0A63632126B9916000F324CC /* gilroy-heavy.ttf */,
+			);
+			path = gilroyFont;
+			sourceTree = "<group>";
+		};
+		0A63633626B9937400F324CC /* gilroy */ = {
+			isa = PBXGroup;
+			children = (
+				0A63633726B9937400F324CC /* Radomir Tinkov - Gilroy-Light.otf */,
+				0A63633826B9937400F324CC /* Radomir Tinkov - Gilroy-ExtraBold.otf */,
+			);
+			path = gilroy;
+			sourceTree = "<group>";
+		};
+		0AE636D926A7EDF6004D7182 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0AE636DA26A7EE0E004D7182 /* AppHelper.swift */,
+				0AE636DC26A7EEF4004D7182 /* IAPHelper.swift */,
+				0AE636DF26A7EF22004D7182 /* RazeFaceProducts.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1D49E80DACE404AD255330DE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F530327F24A89C087F897A1B /* Pods-MusicGen.debug.xcconfig */,
+				80DCCD87C101578BE7B227A1 /* Pods-MusicGen.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		629B9870373225FCF2AE9EF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91F7EA54859A99BFA91E47E0 /* Pods_MusicGen.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +300,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A6190402672020E00A001E1 /* Build configuration list for PBXNativeTarget "MusicGen" */;
 			buildPhases = (
+				EF25F0F42C99ED63002F40E5 /* [CP] Check Pods Manifest.lock */,
 				0A6190282672020B00A001E1 /* Sources */,
 				0A6190292672020B00A001E1 /* Frameworks */,
 				0A61902A2672020B00A001E1 /* Resources */,
+				E8E3683E94515BA677432403 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,22 +352,112 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A4B007626B3E47700E4AD64 /* gilroy-semibold.ttf in Resources */,
+				0A63632F26B9916000F324CC /* gilroy-thin.ttf in Resources */,
+				0A63633026B9916000F324CC /* gilroy-extrabolditalic.ttf in Resources */,
+				0A63632326B9916000F324CC /* gilroy-medium.ttf in Resources */,
+				0A63632C26B9916000F324CC /* gilroy-ultralight.ttf in Resources */,
+				0A63632A26B9916000F324CC /* gilroy-blackitalic.ttf in Resources */,
+				0A63632B26B9916000F324CC /* gilroy-regular.ttf in Resources */,
+				0A63633226B9916000F324CC /* gilroy-bold.ttf in Resources */,
+				0A63632E26B9916000F324CC /* gilroy-mediumitalic.ttf in Resources */,
 				0A61903C2672020D00A001E1 /* LaunchScreen.storyboard in Resources */,
+				0A63633126B9916000F324CC /* gilroy-semibold.ttf in Resources */,
+				0A63632726B9916000F324CC /* gilroy-bolditalic.ttf in Resources */,
+				0A63632626B9916000F324CC /* gilroy-heavyitalic.ttf in Resources */,
+				0A63632D26B9916000F324CC /* gilroy-black.ttf in Resources */,
+				0A63632926B9916000F324CC /* gilroy-regularitalic.ttf in Resources */,
+				0A63632426B9916000F324CC /* gilroy-lightitalic.ttf in Resources */,
+				0A63632226B9916000F324CC /* gilroy-ultralightitalic.ttf in Resources */,
+				0A619046267206BC00A001E1 /* GoogleService-Info.plist in Resources */,
+				0A63633A26B9937400F324CC /* Radomir Tinkov - Gilroy-ExtraBold.otf in Resources */,
+				0A63632826B9916000F324CC /* gilroy-semibolditalic.ttf in Resources */,
 				0A6190392672020D00A001E1 /* Assets.xcassets in Resources */,
+				0A63633326B9916000F324CC /* gilroy-heavy.ttf in Resources */,
+				0A57EA01268488470040A7A8 /* Gilroy-FREE in Resources */,
+				0A63633926B9937400F324CC /* Radomir Tinkov - Gilroy-Light.otf in Resources */,
 				0A6190372672020B00A001E1 /* Main.storyboard in Resources */,
+				0A63632526B9916000F324CC /* gilroy-thinitalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E8E3683E94515BA677432403 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MusicGen/Pods-MusicGen-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MusicGen/Pods-MusicGen-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicGen/Pods-MusicGen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF25F0F42C99ED63002F40E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MusicGen-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A6190282672020B00A001E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A6190342672020B00A001E1 /* ViewController.swift in Sources */,
+				0A6190442672038F00A001E1 /* LoginViewController.swift in Sources */,
+				0A57EA052684D16F0040A7A8 /* DonateViewController.swift in Sources */,
+				0A61905126720F6300A001E1 /* Service.swift in Sources */,
+				0A773DC426B43F4F00F2327D /* SpinnerLoaderView.swift in Sources */,
+				0A61904E26720E3F00A001E1 /* AuthButton.swift in Sources */,
+				0A61904B26720D9400A001E1 /* Extensions.swift in Sources */,
+				0A2D78242683926D0086F44C /* Instruments.swift in Sources */,
+				0AAB840726BA764000E360BC /* HelperFunctions.swift in Sources */,
+				0A77D488269D88C30080167B /* AudioPlayerView.swift in Sources */,
+				0A568FAE26B8248E0020DC46 /* SettingsViewController.swift in Sources */,
+				0A4B00C826C79A20004C4E5C /* CreateMidi.swift in Sources */,
+				0A57EA032684A1BC0040A7A8 /* Genres.swift in Sources */,
+				0A6190342672020B00A001E1 /* MainViewController.swift in Sources */,
+				0A593325267268BF0060EEE0 /* Constants.swift in Sources */,
+				0A593322267223FC0060EEE0 /* User.swift in Sources */,
+				0AE636E226A80150004D7182 /* InstrumentsCollectionViewCell.swift in Sources */,
+				0A45260426971EFE0098111A /* ResponseModel.swift in Sources */,
+				0A42BD76268B0F8300F3A9F0 /* MusicModel.swift in Sources */,
+				0A59332726726AC40060EEE0 /* HeaderView.swift in Sources */,
 				0A6190302672020B00A001E1 /* AppDelegate.swift in Sources */,
+				0AE636DB26A7EE0E004D7182 /* AppHelper.swift in Sources */,
+				0AE636E026A7EF22004D7182 /* RazeFaceProducts.swift in Sources */,
 				0A6190322672020B00A001E1 /* SceneDelegate.swift in Sources */,
+				0A57EA072684DCA30040A7A8 /* PaymentDetailsViewController.swift in Sources */,
+				0A42BD74268B0D4E00F3A9F0 /* API.swift in Sources */,
+				0AE636DD26A7EEF4004D7182 /* IAPHelper.swift in Sources */,
+				0A4B00CA26C79A77004C4E5C /* CreateMidis.swift in Sources */,
+				0A61904826720D2000A001E1 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,17 +601,19 @@
 		};
 		0A6190412672020E00A001E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F530327F24A89C087F897A1B /* Pods-MusicGen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MusicGen/MusicGen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VCB4A8S4F6;
+				DEVELOPMENT_TEAM = C9B6324J22;
 				INFOPLIST_FILE = MusicGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kartinin.musicgenerator.MusicGen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musicgenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -302,17 +622,19 @@
 		};
 		0A6190422672020E00A001E1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80DCCD87C101578BE7B227A1 /* Pods-MusicGen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MusicGen/MusicGen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VCB4A8S4F6;
+				DEVELOPMENT_TEAM = C9B6324J22;
 				INFOPLIST_FILE = MusicGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kartinin.musicgenerator.MusicGen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musicgenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
