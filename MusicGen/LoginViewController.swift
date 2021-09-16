@@ -54,13 +54,15 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private let forgotPassTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Forgot password?"
-        label.font = UIFont(name: "Gilroy-SemiBold", size: 16)
-        label.textAlignment = .center
-        label.textColor = .orangeApp
-        return label
+    private let forgotPassTitleLabel: UIButton = {
+        let btn = UIButton()
+        
+        //btn.textColor = .orangeApp
+        btn.setTitle("Forgot password?", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Gilroy-SemiBold", size: 16)
+        btn.addTarget(self, action: #selector(forgotPassPressed), for: .touchUpInside)
+        btn.setTitleColor(UIColor.orangeApp, for: UIControl.State.normal)
+        return btn
     }()
     
     let dontHaveAccountButton: UIButton = {
@@ -81,6 +83,13 @@ class LoginViewController: UIViewController {
     }
 
     //MARK: - Selectors
+    @objc func forgotPassPressed() {
+        
+        let forgotPassScreen = ForgotPasswordController()
+        let myNavigationController = UINavigationController(rootViewController: forgotPassScreen)
+      //  myNavigationController.modalPresentationStyle = .fullScreen
+        self.present(myNavigationController, animated: true)
+    }
     
     @objc func handleLogin(){
         

@@ -39,10 +39,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     var sizeWidthCellInstruments = [CGSize]()
     
     var audioPlayer: AVAudioPlayer?
+    var switchChardsDidChange = true
     
-  /*  let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    lazy var instrumentsCollectionView: UICollectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-    private let cellReuseIdentifier = "Cell"*/
+    /*  let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+     lazy var instrumentsCollectionView: UICollectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+     private let cellReuseIdentifier = "Cell"*/
     //var headerView = UIView()
     let genresArray = ["50s",
                        "60s",
@@ -68,114 +69,114 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
                        "rock",
                        "trance",
                        "videoGames"
-                       ]
+    ]
     /*let genresArray = ["101 plus",
-                       "1998 PRO MIDI`S",
-                       "1999 PRO MIDI`S",
-                       "1 tot100",
-                       "anthems",
-                       "arabic",
-                       "assorti",
-                       "BLUEGR~5",
-                       "blues",
-                       "broadway",
-                       "CHILDR~7",
-                       "christian",
-                       "christmas",
-                       "classic rock musician",
-                       "classic",
-                       "Classical Archives - The Greats (MIDI)",
-                       "COUNTR~9",
-                       "Country & Western",
-                       "dance",
-                       "DANSM~11",
-                       "Disco House",
-                       "Diversen",
-                       "Diversen GM",
-                       "Diversen Klassiek",
-                       "Diversen Midi GM songs",
-                       "Diversen Midi GS songs",
-                       "drums",
-                       "DUITS~13",
-                       "DUITS~15",
-                       "Esy Listening",
-                       "euro",
-                       "eurodance",
-                       "FILM&~17",
-                       "FOLK&~19",
-                       "FRANS~21",
-                       "funk",
-                       "GForce Trance Epic House 220 MIDI loops",
-                       "GM GS Reset",
-                       "happy hardcore",
-                       "Hard Rock 2",
-                       "hardcore",
-                       "Hardcore&Hardstyle MIDIs",
-                       "harddance",
-                       "Heavy Metal -MidiFiles",
-                       "hollands",
-                       "HOUSE~25",
-                       "instrumental",
-                       "INTERNET",
-                       "ITALI~27",
-                       "JAPAN~29",
-                       "jazz",
-                       "JAZZ_~33",
-                       "JAZZR~31",
-                       "JINGL~35",
-                       "Karaoke Midi Files",
-                       "Kerst Midi Files",
-                       "KERST~37",
-                       "KLASS~39",
-                       "LATIN~41",
-                       "MEDLE~43",
-                       "Midi -DRUMS",
-                       "Midi-bb",
-                       "Midi-gm",
-                       "motown",
-                       "Movie_Soundtracks",
-                       "M-sales",
-                       "NEDER~45",
-                       "NEW-AGE",
-                       "Oldies_but_Goodies",
-                       "ONBEK~49",
-                       "OTHERS - MIDI",
-                       "PIANO~51",
-                       "Polyfonisk musik",
-                       "pop",
-                       "pop midi",
-                       "Pop_and_Top40",
-                       "PsyTrance Artists Midi Pack",
-                       "rap",
-                       "rave",
-                       "reggae",
-                       "rock",
-                       "rock midi_",
-                       "Roland Songs",
-                       "siemens",
-                       "Song Teksten",
-                       "Soul, Gospel & Rhythm & Blues",
-                       "Soundtracks",
-                       "stadium",
-                       "Synth Music",
-                       "Synthesizer",
-                       "techno",
-                       "teksten",
-                       "television",
-                       "The Sound Of The 50's (Engelstalig)",
-                       "The Sound Of The 60's (Engelstalig)",
-                       "The Sound Of The 70's (Engelstalig)",
-                       "The Sound Of The 80's (Engelstalig)",
-                       "The Sound Of The 90's (Engelstalig)",
-                       "Themes movie TV",
-                       "tiroler",
-                       "Polka & Marsmuziek",
-                       "trance",
-                       "tropical",
-                       "Various Artists",
-                       "Video_Games",
-                       "WWW.HANDS-ON-MIDI.CO.UK",
-                       "WWW.TUNE1000.CO.UK"]*/
+     "1998 PRO MIDI`S",
+     "1999 PRO MIDI`S",
+     "1 tot100",
+     "anthems",
+     "arabic",
+     "assorti",
+     "BLUEGR~5",
+     "blues",
+     "broadway",
+     "CHILDR~7",
+     "christian",
+     "christmas",
+     "classic rock musician",
+     "classic",
+     "Classical Archives - The Greats (MIDI)",
+     "COUNTR~9",
+     "Country & Western",
+     "dance",
+     "DANSM~11",
+     "Disco House",
+     "Diversen",
+     "Diversen GM",
+     "Diversen Klassiek",
+     "Diversen Midi GM songs",
+     "Diversen Midi GS songs",
+     "drums",
+     "DUITS~13",
+     "DUITS~15",
+     "Esy Listening",
+     "euro",
+     "eurodance",
+     "FILM&~17",
+     "FOLK&~19",
+     "FRANS~21",
+     "funk",
+     "GForce Trance Epic House 220 MIDI loops",
+     "GM GS Reset",
+     "happy hardcore",
+     "Hard Rock 2",
+     "hardcore",
+     "Hardcore&Hardstyle MIDIs",
+     "harddance",
+     "Heavy Metal -MidiFiles",
+     "hollands",
+     "HOUSE~25",
+     "instrumental",
+     "INTERNET",
+     "ITALI~27",
+     "JAPAN~29",
+     "jazz",
+     "JAZZ_~33",
+     "JAZZR~31",
+     "JINGL~35",
+     "Karaoke Midi Files",
+     "Kerst Midi Files",
+     "KERST~37",
+     "KLASS~39",
+     "LATIN~41",
+     "MEDLE~43",
+     "Midi -DRUMS",
+     "Midi-bb",
+     "Midi-gm",
+     "motown",
+     "Movie_Soundtracks",
+     "M-sales",
+     "NEDER~45",
+     "NEW-AGE",
+     "Oldies_but_Goodies",
+     "ONBEK~49",
+     "OTHERS - MIDI",
+     "PIANO~51",
+     "Polyfonisk musik",
+     "pop",
+     "pop midi",
+     "Pop_and_Top40",
+     "PsyTrance Artists Midi Pack",
+     "rap",
+     "rave",
+     "reggae",
+     "rock",
+     "rock midi_",
+     "Roland Songs",
+     "siemens",
+     "Song Teksten",
+     "Soul, Gospel & Rhythm & Blues",
+     "Soundtracks",
+     "stadium",
+     "Synth Music",
+     "Synthesizer",
+     "techno",
+     "teksten",
+     "television",
+     "The Sound Of The 50's (Engelstalig)",
+     "The Sound Of The 60's (Engelstalig)",
+     "The Sound Of The 70's (Engelstalig)",
+     "The Sound Of The 80's (Engelstalig)",
+     "The Sound Of The 90's (Engelstalig)",
+     "Themes movie TV",
+     "tiroler",
+     "Polka & Marsmuziek",
+     "trance",
+     "tropical",
+     "Various Artists",
+     "Video_Games",
+     "WWW.HANDS-ON-MIDI.CO.UK",
+     "WWW.TUNE1000.CO.UK"]*/
     var instumentsArray = [String]()
     let UIPicker: UIPickerView = UIPickerView()
     let UIPickerInstruments: UIPickerView = UIPickerView()
@@ -196,7 +197,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     var midiFilename = String()
     var mp3Filename = String()
     var messageForDownload = ""
-
+    
     let settingsBtn: UIButton = {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Settings", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.orangeApp])
@@ -240,7 +241,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         button.addTarget(self, action: #selector(instrumentsBtnPressed), for: .touchUpInside)
         return button
     }()
-
+    
     private let pianoBtn: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "pianoBtn")
@@ -325,16 +326,28 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         return button
     }()
     
+    private let shareBtn: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "share1X")
+        button.setImage(image, for: .normal)
+        button.setTitle("Share", for: .normal)
+        button.addTarget(self, action: #selector(shareBtnPressed), for: .touchUpInside)
+        button.titleEdgeInsets = UIEdgeInsets(top: 40, left: -50, bottom: 0, right: 0)
+        button.setTitleColor(UIColor.purpleApp, for: UIControl.State.normal)
+        button.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        button.titleLabel?.font = UIFont(name: "Gilroy-SemiBold", size: 16)
+        return button
+    }()
     
     var user: User? {
-            didSet{
-               // locationInputView.user = user
-                print("DEBUG: ..")
-                generateBtn.isHidden = false
-            }
+        didSet{
+            // locationInputView.user = user
+            print("DEBUG: ..")
+            generateBtn.isHidden = false
         }
+    }
     lazy var instrumentsCollectionView: UICollectionView = {
-       let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -343,60 +356,60 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     }()
     
     let modelName = UIDevice.modelName
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if Auth.auth().currentUser?.uid != nil {
             let uid = Auth.auth().currentUser?.uid ?? ""
-           //user is logged in
+            //user is logged in
             print("login")
             Service.shared.fetchUserData(uid: uid, completion: { user in
                 print(user)
                 self.user = user
-                            })
+            })
             let currentUser = Auth.auth().currentUser
             currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-              if let error = error {
-                // Handle error
-                print(error)
-                return;
-              }
+                if let error = error {
+                    // Handle error
+                    print(error)
+                    return;
+                }
                 self.idToken = idToken ?? ""
                 print("self.idToken = \(self.idToken)")
                 print("GENERATE BTN")
                 //let strURL = "147.182.236.169/users"
                 guard let strURL = URL(string: "http://147.182.236.169/users") else { return }
                 let headers: HTTPHeaders =  [ "id-token" : self.idToken ]
-
+                
                 AF.request(strURL, method: .post, headers: headers).responseJSON { (responseObject) -> Void in
-
-                       // print(responseObject)
+                    
+                    // print(responseObject)
                     switch (responseObject.result) {
                     case .success(let json):
-
+                        
                         let json2 = json as? Dictionary<String, AnyObject>
                         print("json2=\(json2)")
                         let uid_str = json2?["uid"] as? String ?? ""
                         print("uid_str = \(uid_str)")
                         self.uidUser = uid_str
-
+                        
                     case .failure(let error):
-                      print(error)
+                        print(error)
                     //failure code here
                     }
-              // Send token to your backend via HTTPS
-              // ...
+                    // Send token to your backend via HTTPS
+                    // ...
                 }
-              // Send token to your backend via HTTPS
+                // Send token to your backend via HTTPS
             }
-
-            }else{
-             //user is not logged in
-                let vc = LoginViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
-            }
+            
+        }else{
+            //user is not logged in
+            let vc = LoginViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
         
         for i in 0..<Instruments.allCases.count {
             if let font = UIFont(name: "Gilroy-SemiBold", size: 16) {
@@ -409,25 +422,25 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         }
         
     }
-
-var uidUser = String()
-  
+    
+    var uidUser = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  "\(Instruments.statusList[indexPath.row])"
-       
+        //  "\(Instruments.statusList[indexPath.row])"
         
-       
         
-       
+        
+        
+        
         configure()
-      
-       
+        
+        
         self.view.backgroundColor = .bgApp
         
         
         for instrument in Instruments.allCases {
-          
+            
             instumentsArray.append(instrument.rawValue)
         }
         
@@ -444,20 +457,38 @@ var uidUser = String()
         catch { print("already logged out") }
         
     }
+    
+    func createSpinnerView() {
+        let child = SpinnerLoaderView()
+
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+
+        // wait two seconds to simulate some work happening
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // then remove the spinner view controller
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
     //PICKER CONTROLLER
     
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         self.dismiss(animated: true, completion: nil)
     }
-  
+    
     var songUrl: NSURL = NSURL()
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         let assetURL = mediaItemCollection.items.first?.artist
-      
-            print("songUrl = \(assetURL)")
-           self.dismiss(animated: true, completion: nil)
-       }
-  
+        
+        print("songUrl = \(assetURL)")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     func createDownDesign() {
         //Down design
@@ -473,6 +504,10 @@ var uidUser = String()
         
         view.addSubview(donateBtn)
         donateBtn.anchor(top: barDown.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 50, width: 80, height: 80)
+         
+        view.addSubview(shareBtn)
+        shareBtn.anchor(top: barDown.topAnchor, left: view.leftAnchor, paddingTop: 15, paddingLeft: 120, width: 50, height: 50)
+        shareBtn.isHidden = true
     }
     
     func configure() {
@@ -496,7 +531,7 @@ var uidUser = String()
         genresArrow.centerY(inView: genresBtn)
         
         /*view.addSubview(instrumentsBtn)
-        instrumentsBtn.anchor(top: genresBtn.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20, width: Constants.screenSize.width-40, height: 60 )*/
+         instrumentsBtn.anchor(top: genresBtn.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20, width: Constants.screenSize.width-40, height: 60 )*/
         
         let stackBtn = UIStackView(arrangedSubviews: [pianoBtn,
                                                       guitarBtn,
@@ -510,7 +545,7 @@ var uidUser = String()
         stackBtn.anchor(top: genresBtn.bottomAnchor, width: Constants.screenSize.width-20, height: 55)
         stackBtn.centerX(inView: view)
         stackBtn.isHidden = true
-       
+        
         
         addChardsView.backgroundColor = .purpleApp
         addChardsView.layer.cornerRadius = 15
@@ -587,8 +622,8 @@ var uidUser = String()
         v.customControlButtonVisible = false
         v.placeholder = ""
         v.unit = ""  //  -> change default unit from temperature to anything you like
-      
-    
+        
+        
         v.progress = 100 //  -> 0..100 a way to say percentage
         v.value = 20
         v.minValue = 0
@@ -609,11 +644,11 @@ var uidUser = String()
         
         //TIMER
         /*let bgForCircleTimer = UIView()
-        bgForCircleTimer.layer.cornerRadius = 80
-        view.addSubview(bgForCircleTimer)
-        bgForCircleTimer.backgroundColor = UIColor(patternImage: UIImage(named: "knob_bpm1X")!)
-        bgForCircleTimer.anchor(top: controlAiView.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingRight: 0, width: Constants.screenSize.width/2-20, height: Constants.screenSize.width/2-20)
-        */
+         bgForCircleTimer.layer.cornerRadius = 80
+         view.addSubview(bgForCircleTimer)
+         bgForCircleTimer.backgroundColor = UIColor(patternImage: UIImage(named: "knob_bpm1X")!)
+         bgForCircleTimer.anchor(top: controlAiView.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingRight: 0, width: Constants.screenSize.width/2-20, height: Constants.screenSize.width/2-20)
+         */
         setupSliders()
         view.addSubview(generateBtn)
         view.addSubview(getSongsBtn)
@@ -630,7 +665,9 @@ var uidUser = String()
         
         getSongsBtn.isHidden = true
         downloadBtn.isHidden = true
+        shareBtn.isHidden = true
         generateBtn.isHidden = false
+        
         
         createDownDesign()
         
@@ -639,55 +676,55 @@ var uidUser = String()
         instrumentsCollectionView.dataSource = self
         view.addSubview(instrumentsCollectionView)
         instrumentsCollectionView.anchor(top: genresBtn.bottomAnchor, left: view.leftAnchor, paddingTop: 0, paddingLeft: 0, width: Constants.screenSize.width, height: 56)
-       // instrumentsCollectionView.centerX(inView: view)
+        // instrumentsCollectionView.centerX(inView: view)
         instrumentsCollectionView.isHidden = false
         
         
         //delete after all done
         
         /*let progressView = UIProgressView(progressViewStyle: .bar)
-        progressView.center = view.center
-        progressView.setProgress(5.0 , animated: true)
-        progressView.trackTintColor = UIColor.darkGray
-        progressView.tintColor = UIColor.purpleApp
-        view.addSubview(progressView)
-        progressView.anchor(top: generateBtn.bottomAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 20, width: Constants.screenSize.width-40, height: 60)
-        progressView.addSubview(percentLoadLabel)
-        percentLoadLabel.anchor(top: progressView.topAnchor, right: progressView.rightAnchor, paddingTop: 10, paddingRight: 20, width: 100, height: 50)
-        percentLoadLabel.centerY(inView: progressView)
-        
-        progressView.addSubview(waitingLoadLabel)
-        waitingLoadLabel.anchor(top: progressView.topAnchor, left: progressView.leftAnchor, paddingTop: 10, paddingLeft: 20, width: 200, height: 50)
-        waitingLoadLabel.centerY(inView: progressView)
-        waitingLoadLabel.font = waitingLoadLabel.font.withSize(25)
-        percentLoadLabel.font = percentLoadLabel.font.withSize(25)
-        var i = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            if i != 100 {
-                i += 1
-            }
-            
-            self.percentLoadLabel.text = "\(i) %"
-            
-            if self.waitingLoadLabel.text == "Waiting.." {
-                self.waitingLoadLabel.text = "Waiting..."
-            } else {
-              
-                self.waitingLoadLabel.text = "Waiting.."
-                
-            }
-        }
-        
-        
-       */
+         progressView.center = view.center
+         progressView.setProgress(5.0 , animated: true)
+         progressView.trackTintColor = UIColor.darkGray
+         progressView.tintColor = UIColor.purpleApp
+         view.addSubview(progressView)
+         progressView.anchor(top: generateBtn.bottomAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 20, width: Constants.screenSize.width-40, height: 60)
+         progressView.addSubview(percentLoadLabel)
+         percentLoadLabel.anchor(top: progressView.topAnchor, right: progressView.rightAnchor, paddingTop: 10, paddingRight: 20, width: 100, height: 50)
+         percentLoadLabel.centerY(inView: progressView)
+         
+         progressView.addSubview(waitingLoadLabel)
+         waitingLoadLabel.anchor(top: progressView.topAnchor, left: progressView.leftAnchor, paddingTop: 10, paddingLeft: 20, width: 200, height: 50)
+         waitingLoadLabel.centerY(inView: progressView)
+         waitingLoadLabel.font = waitingLoadLabel.font.withSize(25)
+         percentLoadLabel.font = percentLoadLabel.font.withSize(25)
+         var i = 0
+         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+         if i != 100 {
+         i += 1
+         }
+         
+         self.percentLoadLabel.text = "\(i) %"
+         
+         if self.waitingLoadLabel.text == "Waiting.." {
+         self.waitingLoadLabel.text = "Waiting..."
+         } else {
+         
+         self.waitingLoadLabel.text = "Waiting.."
+         
+         }
+         }
+         
+         
+         */
     }
- 
+    
     func play(file_name: String) {
- 
+        
         guard let soundURL = Bundle.main.url(forResource: "http://172.104.137.82/songs/\(file_name)", withExtension: "wav") else { return }
-
+        
         do {
-
+            
             audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
             audioPlayer?.prepareToPlay()
             audioPlayer?.delegate = self
@@ -697,20 +734,20 @@ var uidUser = String()
                 // do what ever you want with that "percentage"
                 print("play")
             }
-
+            
         } catch let error {
             audioPlayer = nil
         }
-
+        
     }
     /*func showMidi(_ callback : @escaping (_ midi : MusicModel) -> Void){
-        API.getMidi({
-            res in
-            if res.success {
-                callback()
-            }
-        })
-    }*/
+     API.getMidi({
+     res in
+     if res.success {
+     callback()
+     }
+     })
+     }*/
     //TIMER PART
     func setupSliders() {
         // hours
@@ -731,7 +768,7 @@ var uidUser = String()
         minutesCircularSlider.trackFillColor = .clear
         minutesCircularSlider.endThumbImage = (UIImage(named: "circleForSlider"))
         
-       // minutesCircularSlider.endThumbImage?.rotate(radians: Float.pi * 2.0)
+        // minutesCircularSlider.endThumbImage?.rotate(radians: Float.pi * 2.0)
         let x = CGFloat(25)
         let y = CGFloat(0)
         var transform = CGAffineTransform(translationX: x, y: y)
@@ -740,8 +777,8 @@ var uidUser = String()
         
         viewForTimeSlider.anchor(top: addChardsView.bottomAnchor, right: view.rightAnchor, paddingTop: -40, paddingRight: 0, width: Constants.screenSize.width/2-20, height: Constants.screenSize.width/2-20)
         //minutesCircularSlider.endThumbImage?.frame.layer.transform = transform
-      //  minutesCircularSlider.addTarget(self, action: #selector(self.sliderValueDidChange22(_:)), for: .valueChanged)
-              
+        //  minutesCircularSlider.addTarget(self, action: #selector(self.sliderValueDidChange22(_:)), for: .valueChanged)
+        
         //minutesCircularSlider.thumbRadius
         //.images.fra.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
         //ImageView.transform = ImageView.transform.rotated(by: .pi / 2)
@@ -751,7 +788,7 @@ var uidUser = String()
         hoursLabel.text = "0"
     }
     
-  
+    
     
     
     func instrumentBtnDisabled() {
@@ -769,15 +806,27 @@ var uidUser = String()
     
     //MARK: - SELECTORS
     @objc func donateBtnPressed() {
-    
-          // self.window = UIWindow(frame: UIScreen.main.bounds)
-         
+        
+        // self.window = UIWindow(frame: UIScreen.main.bounds)
+        
         let donateScreen = DonateViewController()
         let myNavigationController = UINavigationController(rootViewController: donateScreen)
         myNavigationController.modalPresentationStyle = .fullScreen
         self.present(myNavigationController, animated: true)
         
         
+    }
+    
+    @objc func shareBtnPressed() {
+        let someText:String = "Hello want to share music link from BIT App"
+            let objectsToShare:URL = URL(string: "\(globalMidiUrl)")!
+            let sharedObjects:[AnyObject] = [objectsToShare as AnyObject,someText as AnyObject]
+            let activityViewController = UIActivityViewController(activityItems : sharedObjects, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.postToTwitter,UIActivity.ActivityType.mail]
+
+            self.present(activityViewController, animated: true, completion: nil)
     }
     
     @objc func instrumentsBtnPressed() {
@@ -810,8 +859,10 @@ var uidUser = String()
     
     @objc func downloadBtnPressed() {
         print("wwww")
+        createSpinnerView()
+        
         var url = URL(string: globalMidiUrl)
-       // let downloadedURL = "https://s3.amazonaws.com/kargopolov/kukushka.mp3"
+        // let downloadedURL = "https://s3.amazonaws.com/kargopolov/kukushka.mp3"
         print(globalMidiUrl)
         if let audioUrl = URL(string: globalMidiUrl) {
             // create your document folder url
@@ -823,7 +874,7 @@ var uidUser = String()
             if FileManager.default.fileExists(atPath: destination.path) {
                 print("The file already exists at path")
                 self.messageForDownload = "The file already exists at path"
-             
+                
             } else {
                 //  if the file doesn't exist
                 //  just download the data from your url
@@ -833,16 +884,16 @@ var uidUser = String()
                         let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                         let mimeType = response?.mimeType, mimeType.hasPrefix("audio"),
                         let location = location, error == nil
-                        else { return }
+                    else { return }
                     do {
                         
                         
                         try FileManager.default.moveItem(at: location, to: destination)
-                       print("MP3 file saved")
+                        print("MP3 file saved")
                         self.messageForDownload = "MP3 file saved to \(destination)"
                         url = destination
                         
-                       
+                        
                     } catch {
                         print(error)
                     }
@@ -850,8 +901,8 @@ var uidUser = String()
             }
         }
         self.timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-           
-            let alert = UIAlertController(title: "Attention", message: self.messageForDownload, preferredStyle: UIAlertController.Style.alert)
+            
+            let alert = UIAlertController(title: "Download Status", message: self.messageForDownload, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             var rv = URLResourceValues()
@@ -863,7 +914,7 @@ var uidUser = String()
             //url!.setTemporaryResourceValue("newName.mp3", forKey: .nameKey)
             timer.invalidate()
         }
-       
+        
     }
     
     @objc func settingsPressed() {
@@ -875,23 +926,34 @@ var uidUser = String()
     }
     
     @objc func genresBtnPressed() {
-        print("Rock")
-        UIPicker.isHidden = false
-        blackView.backgroundColor = .black
-        blackView.alpha = 0.7
-        view.addSubview(blackView)
-        blackView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 0, paddingLeft: 0, width: Constants.screenSize.width, height: Constants.screenSize.height)
-        UIPicker.delegate = self as UIPickerViewDelegate
-        UIPicker.dataSource = self as UIPickerViewDataSource
-        self.view.addSubview(UIPicker)
-        UIPicker.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 0)
-        UIPicker.centerX(inView: view)
-        UIPicker.isHidden = false
-        UIPicker.setValue(UIColor.orange, forKeyPath: "textColor")
+        if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+            let alert = UIAlertController(title: "Attention", message: "You can select genre only in ai3 or ai4 mode", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            getSongsBtn.isHidden = true
+            downloadBtn.isHidden = true
+            shareBtn.isHidden = true
+            generateBtn.isHidden = false
+        } else {
+            UIPicker.isHidden = false
+            blackView.backgroundColor = .black
+            blackView.alpha = 0.7
+            view.addSubview(blackView)
+            blackView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 0, paddingLeft: 0, width: Constants.screenSize.width, height: Constants.screenSize.height)
+            UIPicker.delegate = self as UIPickerViewDelegate
+            UIPicker.dataSource = self as UIPickerViewDataSource
+            self.view.addSubview(UIPicker)
+            UIPicker.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 0)
+            UIPicker.centerX(inView: view)
+            UIPicker.isHidden = false
+            UIPicker.setValue(UIColor.orange, forKeyPath: "textColor")
+            
+            getSongsBtn.isHidden = true
+            downloadBtn.isHidden = true
+            shareBtn.isHidden = true
+            generateBtn.isHidden = false
+        }
         
-        getSongsBtn.isHidden = true
-        downloadBtn.isHidden = true
-        generateBtn.isHidden = false
     }
     
     @objc func pianoBtnPressed() {
@@ -925,42 +987,122 @@ var uidUser = String()
     }
     
     @objc func switchChardsDidChange(_ sender:UISwitch!)
-        {
-            if (sender.isOn == true){
-                print("UISwitch state is now ON")
-            }
-            else{
-                print("UISwitch state is now Off")
-            }
+    {
+        if (sender.isOn == true){
+            print("UISwitch state is now ON")
+            switchChardsDidChange = true
         }
+        else{
+            print("UISwitch state is now Off")
+            switchChardsDidChange = false
+        }
+    }
     @objc func generateBtnPressed() {
-       
+        if self.bpmValue < 80 {
+            self.bpmValue = 80
+        }
+        print("bpmValue = \(self.bpmValue)")
         self.audioPlayers.player?.pause()
         self.audioPlayers.removeFromSuperview()
         self.percentLoadLabel.text = ""
         if self.sliderStepAi == 3 || self.sliderStepAi == 4 {
-          /*  let alert = UIAlertController(title: "Sorry", message: "ai3 and ai4 we are working to fix it now.", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)*/
+            print("self.sliderStepAi= \(self.sliderStepAi)")
+            /*  let alert = UIAlertController(title: "Sorry", message: "ai3 and ai4 we are working to fix it now.", preferredStyle: UIAlertController.Style.alert)
+             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+             self.present(alert, animated: true, completion: nil)*/
             // picker controller
-           /* let audiopicker = MPMediaPickerController(mediaTypes: .anyAudio)
-                audiopicker.prompt = "Audio"
-                audiopicker.delegate = self
-                audiopicker.allowsPickingMultipleItems = false
-                self.present(audiopicker, animated: true, completion: nil)*/
-            let json: [String: Any] = ["modify_length": globalSeconds, "genre": "\(self.genres)"]
+            /* let audiopicker = MPMediaPickerController(mediaTypes: .anyAudio)
+             audiopicker.prompt = "Audio"
+             audiopicker.delegate = self
+             audiopicker.allowsPickingMultipleItems = false
+             self.present(audiopicker, animated: true, completion: nil)*/
+            
+            var allSeconds = 0
+            if hoursLabel.text != "0" {
+                let seconds = Int(minutesLabel.text!)
+                let hours = Int(hoursLabel.text!)
+                allSeconds = hours!*60+seconds!
+            } else {
+                allSeconds = Int(minutesLabel.text!)!
+            }
+            print("allSeconds = \(allSeconds)")
+            globalSeconds = allSeconds
+            
+            var add_chords = [Int]()
+            if saveInstrumentsBtnInt.count == 1 {
+                add_chords = [1]
+            }
+            if saveInstrumentsBtnInt.count == 2 {
+                add_chords = [1,2]
+            }
+            if saveInstrumentsBtnInt.count == 3 {
+                add_chords = [1,2,3]
+            }
+            if saveInstrumentsBtnInt.count == 4 {
+                add_chords = [1,2,3,4]
+            }
+            if saveInstrumentsBtnInt.count == 5 {
+                add_chords = [1,2,3,4,5]
+            }
+            var track_1 = 0
+            var track_2 = 0
+            var track_3 = 0
+            var track_4 = 0
+            var track_5 = 0
+            
+            
+            if saveInstrumentsBtnInt.count == 1 { track_1 = saveInstrumentsBtnInt[0] }
+            if saveInstrumentsBtnInt.count == 2
+            {   track_1 = saveInstrumentsBtnInt[0]
+                track_2 = saveInstrumentsBtnInt[1]
+            }
+            if saveInstrumentsBtnInt.count == 3
+            {
+                track_1 = saveInstrumentsBtnInt[0]
+                track_2 = saveInstrumentsBtnInt[1]
+                track_3 = saveInstrumentsBtnInt[2]
+            }
+            if saveInstrumentsBtnInt.count == 4
+            {
+                track_1 = saveInstrumentsBtnInt[0]
+                track_2 = saveInstrumentsBtnInt[1]
+                track_3 = saveInstrumentsBtnInt[2]
+                track_4 = saveInstrumentsBtnInt[3]
+            }
+            if saveInstrumentsBtnInt.count == 5
+            {
+                track_1 = saveInstrumentsBtnInt[0]
+                track_2 = saveInstrumentsBtnInt[1]
+                track_3 = saveInstrumentsBtnInt[2]
+                track_4 = saveInstrumentsBtnInt[3]
+                track_5 = saveInstrumentsBtnInt[4]
+                
+            }
+            
+            
+            let json: [String: Any] = ["change_instruments": [
+                "track_1": track_1,
+                "track_2": track_2,
+                "track_3": track_3,
+                "track_4": track_4,
+                "track_5": track_5
+            ],
+            "add_chords": add_chords, "add_drums": true, "set_bpm": self.bpmValue, "modify_length": globalSeconds, "genre": "\(self.genres)"]
+            print("json = \(json)")
+            
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
-
+            
             // create post request
             print("sliderStepAi = \(sliderStepAi)")
-            let url = URL(string: "ttp://147.182.236.169/midi?gen_type=ai\(self.sliderStepAi)")!
+            let url = URL(string: "http://147.182.236.169/generate?gen_type=ai\(self.sliderStepAi)")!
+           
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("\(idToken)", forHTTPHeaderField: "id-token")
-
+            
             // insert json data to the request
             request.httpBody = jsonData
-
+            
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "No data")
@@ -972,8 +1114,57 @@ var uidUser = String()
                     print("responseJSON = \(responseJSON)")
                 }
             }
-
+            
+            let progressView = UIProgressView(progressViewStyle: .bar)
+            progressView.center = self.view.center
+            progressView.setProgress(5.0 , animated: true)
+            progressView.trackTintColor = UIColor.darkGray
+            progressView.tintColor = UIColor.purpleApp
+            self.view.addSubview(progressView)
+            progressView.anchor(top: self.generateBtn.bottomAnchor, left: self.view.leftAnchor, paddingTop: 30, paddingLeft: 20, width: Constants.screenSize.width-40, height: 60)
+            progressView.addSubview(self.percentLoadLabel)
+            self.percentLoadLabel.anchor(top: progressView.topAnchor, right: progressView.rightAnchor, paddingTop: 10, paddingRight: 20, width: 100, height: 50)
+            self.percentLoadLabel.centerY(inView: progressView)
+            
+            progressView.addSubview(self.waitingLoadLabel)
+            self.waitingLoadLabel.anchor(top: progressView.topAnchor, left: progressView.leftAnchor, paddingTop: 10, paddingLeft: 20, width: 200, height: 50)
+            self.waitingLoadLabel.centerY(inView: progressView)
+            self.waitingLoadLabel.font = self.waitingLoadLabel.font.withSize(25)
+            self.percentLoadLabel.font = self.percentLoadLabel.font.withSize(25)
+            self.percentLoadLabel.isHidden = false
+            self.waitingLoadLabel.isHidden = false
+            var i = 50
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                if i != 100 {
+                    i += 2
+                }
+                
+                //  self.percentLoadLabel.text = "\(i) %"
+                
+                if self.waitingLoadLabel.text == "Waiting.." {
+                    self.waitingLoadLabel.text = "Waiting..."
+                } else {
+                    
+                    self.waitingLoadLabel.text = "Waiting.."
+                    
+                }
+            }
+            self.generateBtn.isHidden = true
+            self.timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
+                
+                // self.percentLoadLabel.text = "100 %"
+                self.waitingLoadLabel.text = "Complete"
+                
+                self.getSongsBtn.isHidden = false
+                self.downloadBtn.isHidden = true
+                self.shareBtn.isHidden = true
+                
+                progressView.removeFromSuperview()
+                timer.invalidate()
+            }
+            
             task.resume()
+            
             
         }
         if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
@@ -987,7 +1178,7 @@ var uidUser = String()
             }
             print("allSeconds = \(allSeconds)")
             globalSeconds = allSeconds
-           
+            
             var add_chords = [Int]()
             if saveInstrumentsBtnInt.count == 1 {
                 add_chords = [1]
@@ -1045,22 +1236,22 @@ var uidUser = String()
                 "track_3": track_3,
                 "track_4": track_4,
                 "track_5": track_5
-              ],
-            "add_chords": add_chords, "add_drums": true, "set_bpm": self.bpmValue, "modify_length": globalSeconds, "genre": "\(self.genres)"]
+            ],
+            "add_chords": add_chords, "add_drums": true, "set_bpm": self.bpmValue, "modify_length": globalSeconds, "genre": "pop"]
             print("json = \(json)")
-
+            
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
-
+            
             // create post request
             print("sliderStepAi = \(sliderStepAi)")
             let url = URL(string: "http://147.182.236.169/songs?gen_type=ai\(self.sliderStepAi)")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("\(idToken)", forHTTPHeaderField: "id-token")
-
+            
             // insert json data to the request
             request.httpBody = jsonData
-
+            
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "No data")
@@ -1072,7 +1263,7 @@ var uidUser = String()
                     print("responseJSON = \(responseJSON)")
                 }
             }
-
+            
             task.resume()
             
             let progressView = UIProgressView(progressViewStyle: .bar)
@@ -1099,43 +1290,44 @@ var uidUser = String()
                     i += 2
                 }
                 
-              //  self.percentLoadLabel.text = "\(i) %"
+                //  self.percentLoadLabel.text = "\(i) %"
                 
                 if self.waitingLoadLabel.text == "Waiting.." {
                     self.waitingLoadLabel.text = "Waiting..."
                 } else {
-                  
+                    
                     self.waitingLoadLabel.text = "Waiting.."
                     
                 }
             }
             self.generateBtn.isHidden = true
             self.timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
-               
-               // self.percentLoadLabel.text = "100 %"
+                
+                // self.percentLoadLabel.text = "100 %"
                 self.waitingLoadLabel.text = "Complete"
-             
+                
                 self.getSongsBtn.isHidden = false
                 self.downloadBtn.isHidden = true
-               
+                self.shareBtn.isHidden = true
+                
                 progressView.removeFromSuperview()
                 timer.invalidate()
             }
         }
         
-       
+        
     }
     var audioPlayers = AudioPlayerView()
-   
+    
     @objc func getSongsBtnPressed() {
         print("GENERATE BTN")
         
-       
-       // guard let strURL = URL(string: "http://147.182.236.169/songs?gen_type=ai\(self.sliderStepAi)") else { return }
+        
+        // guard let strURL = URL(string: "http://147.182.236.169/songs?gen_type=ai\(self.sliderStepAi)") else { return }
         // for get songs
         guard let strURL = URL(string: "http://147.182.236.169/songs") else { return }
         print("strURL = \(strURL)")
-      
+        
         let headers: HTTPHeaders =  [ "id-token" : "\(self.idToken)"]
         //let params2 =  ["add_chords": [], "add_drums": true, "set_bpm": 180, "modify_length": 120, "genre": "blues"] as [String : Any]
         let params = [
@@ -1145,7 +1337,7 @@ var uidUser = String()
                 "track_3": 0,
                 "track_4": 0,
                 "track_5": 0
-              ],
+            ],
             "add_chords": [],
             "add_drums": true,
             "set_bpm": self.bpmValue,
@@ -1153,12 +1345,12 @@ var uidUser = String()
             "genre": "\(self.genres)"
         ] as [String : Any]
         print("params = \(params) \(self.genres)")
-            /*let params = [
-            "add_drums": true,
-            "set_bpm": self.bpmValue,
-            "modify_length": 130,
-            "genre": "\(self.genres)"
-        ] as [String : Any]*/
+        /*let params = [
+         "add_drums": true,
+         "set_bpm": self.bpmValue,
+         "modify_length": 130,
+         "genre": "\(self.genres)"
+         ] as [String : Any]*/
         self.percentLoadLabel.text = ""
         let progressView = UIProgressView(progressViewStyle: .bar)
         progressView.center = self.view.center
@@ -1189,154 +1381,81 @@ var uidUser = String()
             if self.waitingLoadLabel.text == "Waiting.." {
                 self.waitingLoadLabel.text = "Waiting..."
             } else {
-              
+                
                 self.waitingLoadLabel.text = "Waiting.."
                 
             }
         }
-    
-
+        
+        
         AF.request( strURL, method: .get, headers: headers).responseJSON { response in
             debugPrint(response)
-        
-          //  print("data =\(response.response)")
-                 switch (response.result) {
-                 case .success(let json):
-                   
-                    
-                  
-                  /*  let cartItems = json as? [[String:Any]]
-                    var cart = [String:Any]()
-                    cart["createMidi"] = cartItems?.flatMap({ $0.compactMap { $0.value } })
-                   // cart["telco"] = "something"
-                   // cart["fcm_token"] = "tokden"
-                   // cart["email"] = "email"
-                    let jsonData = try? JSONSerialization.data(withJSONObject: cartItems, options: [])
-                    let jsonString = String(data: jsonData!, encoding: .utf8)
-                    print("Printing JSON \(jsonString)")*/
-                   
-                    
-                    if let arry = json as? [[String:Any]] {
-                             for dictionary in arry {
-                                    print("fileName =\(dictionary)")
-                                print(dictionary["output_midi_filename"]!)
-                                self.midiFilename = dictionary["file_name"] as! String
-                                self.mp3Filename = dictionary["file_name"] as! String
-                                print(dictionary["uid"]!)
-                                print("http://147.182.236.169/files?file_name=data%2Fresults%\(self.midiFilename)")
-                                }
+            
+            //  print("data =\(response.response)")
+            switch (response.result) {
+            case .success(let json):
+                
+                if let arry = json as? [[String:Any]] {
+                    for dictionary in arry {
+                        print("fileName =\(dictionary)")
+                        print(dictionary["output_midi_filename"]!)
+                        self.midiFilename = dictionary["file_name"] as! String
+                        self.mp3Filename = dictionary["file_name"] as! String
+                        print(dictionary["uid"]!)
+                        print("http://147.182.236.169/files?file_name=data%2Fresults%\(self.midiFilename)")
                     }
-                    globalMidiUrl = "http://147.182.236.169/files?file_name=data%2Fresults%2F\(self.midiFilename)_CONVERT_MID_TO_WAV.mp3"
-                    //self.timer?.invalidate()
-                       
-                    
-                    
-                    let player = AudioPlayerView()
-                    self.audioPlayers = player
-                   // player.urlTrack = "http://147.182.236.169/files?file_name=data%2Fresults%2F\(self.midiFilename)_CONVERT_MID_TO_WAV.mp3"
-                    print("url midi track =\(globalMidiUrl)")
-                    self.view.addSubview(player)
-                    player.player!.pause()
-                    let image = UIImage(named: "play1X")
-                    player.playButton.setImage(image, for: .normal)
-                    player.anchor(top: self.barDown.topAnchor, paddingTop: -20, width: Constants.screenSize.width-40, height: 50)
-                    player.centerX(inView: self.view)
-                   // self.createDownDesign()
-                    self.generateBtn.isHidden = false
-                    self.waitingLoadLabel.text = "Complete"
-                    self.percentLoadLabel.text = "100%"
-                    progressView.removeFromSuperview()
-                    self.downloadBtn.isHidden = false
-                    self.timer?.invalidate()
-                 /*   let strURL = "http://147.182.236.169/tracks/"
-                        let params = ["file_name": file_name]
-                       
-                        let headers: HTTPHeaders =  [ "id-token" : self.idToken ]
-
-                        AF.request(strURL, method: .get, parameters: params, headers: headers).responseJSON { (responseObject) -> Void in
-
-                                print(responseObject)
-                            switch (responseObject.result) {
-                            case .success(let json):
-                             // let json2 = json as? Dictionary<String, AnyObject>
-                              //let userID = json2?["user_id"] as? String ?? ""
-                            //  let message = json2?["message"] as? String ?? ""
-                             // callbackPopup(title, message)
-                              print("json success =\(json)")
-                                self.timer?.invalidate()
-                                self.percentLoadLabel.text = "100 %"
-                                self.waitingLoadLabel.text = "Compleate"
-                                //self.play(file_name: file_name)
-                                let player = AudioPlayerView()
-                                self.view.addSubview(player)
-                               
-                                player.anchor(top: self.barDown.topAnchor, paddingTop: -20, width: Constants.screenSize.width-40, height: 100)
-                                player.centerX(inView: self.view)
-                                
-                            case .failure(let error):
-                              print(error)
-                            //failure code here
-                            }
-                        }*/
-                    
-                    
-                   
-                 /*   let player = AudioPlayerView()
-                    player.urlTrack = "http://147.182.236.169\(outputMidiFilename)"
-                    self.view.addSubview(player)
-                   
-                    player.anchor(top: self.barDown.topAnchor, paddingTop: -20, width: Constants.screenSize.width-40, height: 50)
-                    player.centerX(inView: self.view)*/
-              
-                 case .failure(let error):
-                   print(error)
-                 }
-                    
+                }
+                globalMidiUrl = "http://147.182.236.169/files?file_name=%2Fapp%2Fdata%2Fresults%2F\(self.midiFilename)_midi_to_mp3.mp3"
+                //self.timer?.invalidate()
+                //http://147.182.236.169/files?file_name=%2Fapp%2Fdata%2Fresults%2Fdmitrykartini%2Fai2_100_rock_12-09-2021-20-34-33_midi_to_mp3.mp3
+                
+                //http://147.182.236.169/files?file_name=%2Fapp%2Fdata%2Fresults%2FWH2OrrClocO7ZiF8Jq8muUmSjse2/ai1_180_country_13-09-2021-05-56-27_midi_to_mp3.mp3
+                let player = AudioPlayerView()
+                self.audioPlayers = player
+                // player.urlTrack = "http://147.182.236.169/files?file_name=data%2Fresults%2F\(self.midiFilename)_CONVERT_MID_TO_WAV.mp3"
+                print("url midi track =\(globalMidiUrl)")
+                self.view.addSubview(player)
+                
+                player.player!.pause()
+                let image = UIImage(named: "play1X")
+                player.playButton.setImage(image, for: .normal)
+                player.anchor(top: self.barDown.topAnchor, paddingTop: -20, width: Constants.screenSize.width-40, height: 70)
+                player.centerX(inView: self.view)
+                
+                self.donateBtn.removeFromSuperview()
+                self.shareBtn.removeFromSuperview()
+                self.downloadBtn.removeFromSuperview()
+                self.view.addSubview(self.downloadBtn)
+                self.downloadBtn.anchor(top: self.barDown.topAnchor, left: self.view.leftAnchor, paddingTop: 0, paddingLeft: 50, width: 80, height: 80)
+                self.downloadBtn.isHidden = true
+                
+                self.view.addSubview(self.shareBtn)
+                self.shareBtn.anchor(top: self.barDown.topAnchor, left: self.view.leftAnchor, paddingTop: 15, paddingLeft: 120, width: 50, height: 50)
+                self.shareBtn.isHidden = true
+                self.view.addSubview(self.donateBtn)
+                self.donateBtn.anchor(top: self.barDown.topAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 50, width: 80, height: 80)
+                
+                // self.createDownDesign()
+                self.generateBtn.isHidden = false
+                self.waitingLoadLabel.text = "Complete"
+                self.percentLoadLabel.text = "100%"
+                progressView.removeFromSuperview()
+                self.downloadBtn.isHidden = false
+                self.shareBtn.isHidden = false
+                self.timer?.invalidate()
+                
+            case .failure(let error):
+                print(error)
+            }
+            
         }
         self.getSongsBtn.isHidden = true
         
-        
-       // let url = "http://147.182.236.169/songs?gen_type=ai1"
-                       /*   let request = NSMutableURLRequest(url: NSURL(string: url)! as URL)
-                          request.httpMethod = "POST"
-                          request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("\(idToken)", forHTTPHeaderField: "id-token")
-                          //request.setValue("idToken", forKey: idToken)
-        //  request.setValue("\(idToken)", forHTTPHeaderField:"Authorization")
-                          var params :[String: Any]?
-                          params = ["modify_length" : 250, "genre" : "arabic", "add_drums": true,
-                                    "set_bpm": 10]*/
-                         
-    
-        
-        
-        //let strURL = "147.182.236.169/users"
-       // guard let strURL = URL(string: "http://147.182.236.169/songs") else { return }
-        
-
-       /* AF.request(strURL, method: .post, parameters: params, headers: headers).responseJSON { (responseObject) -> Void in
-
-               // print(responseObject)
-            switch (responseObject.result) {
-            case .success(let json):
-                let json2 = json as? Dictionary<String, AnyObject>
-                print("json2=\(json2)")
-                let fileName = json2?["file_name"] as? String ?? ""
-                print("fileName = \(fileName)")
-               // self.uidUser = uid_str
-            case .failure(let error):
-              print(error)
-            //failure code here
-            }
-      // Send token to your backend via HTTPS
-      // ...
-        }*/
-      // Send token to your backend via HTTPS
     }
     
-  
-       
-   
+    
+    
+    
     // MARK: user interaction methods
     
     @objc func updateHours() {
@@ -1361,7 +1480,7 @@ var uidUser = String()
         var selectedHour = Int(hoursCircularSlider.endPointValue)
         var selectedMinute = Int(minutesCircularSlider.endPointValue)
         // TODO: use date formatter
-       
+        
         if selectedMinute >= 55 && selectedMinute <= 60  {
             //selectedHour = selectedHour + 1
             if hourDefoultCheck == false {
@@ -1389,17 +1508,17 @@ var uidUser = String()
     
     //COLLECTION VIEW
     var imagescv = ["cv1","cv2","cv3","cv4","cv5"]
-
-
-   
-
-
+    
+    
+    
+    
+    
 }
 
 extension MainViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         
-       return 1
+        return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var count = 0
@@ -1409,19 +1528,19 @@ extension MainViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
         if pickerView == UIPicker {
             count = genresArray.count
         }
-       return count
+        return count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         var row2 = String()
         if pickerView == UIPickerInstruments {
-           row2 = instumentsArray[row]
+            row2 = instumentsArray[row]
         }
         if pickerView == UIPicker {
-           row2 = genresArray[row]
+            row2 = genresArray[row]
         }
-       
         
-       return row2
+        
+        return row2
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == UIPickerInstruments {
@@ -1448,50 +1567,50 @@ extension MainViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-        {
+    {
         return Instruments.allCases.count
-        }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-        {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InstrumentsCollectionViewCell
-            //if collectionView == instrumentsCollectionView {
+    }
     
-    cell.instrumentLabel.text = "\(Instruments.statusList[indexPath.row])"
-    cell.addShadow()
-    //cell.instrumentLabel.frame.width = self.sizeWidthCellInstruments.width
- //   cell.frame.width = self.sizeWidthCellInstruments.width
-  //  cell.frame.height = 30
- 
-                cell.tag = indexPath.row
-   
-                    /* for i in 0..<saveInstrumentsBtn.count {
-        if self.saveInstrumentsBtn[i].tag == cell.tag {
-            cell.backgroundColor = .orangeApp
-        } else {
-            cell.backgroundColor = .purpleApp
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InstrumentsCollectionViewCell
+        //if collectionView == instrumentsCollectionView {
+        
+        cell.instrumentLabel.text = "\(Instruments.statusList[indexPath.row])"
+        cell.addShadow()
+        //cell.instrumentLabel.frame.width = self.sizeWidthCellInstruments.width
+        //   cell.frame.width = self.sizeWidthCellInstruments.width
+        //  cell.frame.height = 30
+        
+        cell.tag = indexPath.row
+        
+        /* for i in 0..<saveInstrumentsBtn.count {
+         if self.saveInstrumentsBtn[i].tag == cell.tag {
+         cell.backgroundColor = .orangeApp
+         } else {
+         cell.backgroundColor = .purpleApp
+         }
+         }*/
+        if arrSelectedIndex.contains(indexPath) { // You need to check wether selected index array contain current index if yes then change the color
+            cell.backgroundColor = UIColor.orangeApp
         }
-    }*/
-    if arrSelectedIndex.contains(indexPath) { // You need to check wether selected index array contain current index if yes then change the color
-               cell.backgroundColor = UIColor.orangeApp
-           }
-           else {
-               cell.backgroundColor = UIColor.purpleApp
-           }
-    
-            
-            
-            
-            return cell
+        else {
+            cell.backgroundColor = UIColor.purpleApp
         }
+        
+        
+        
+        
+        return cell
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       print("User tapped on item \(indexPath.row)")
-       
+        print("User tapped on item \(indexPath.row)")
+        
         print("You selected cell #\(indexPath.item)!")
         
-
-                let strData = Instruments.statusList[indexPath.item]
+        
+        let strData = Instruments.statusList[indexPath.item]
         for i in 0..<saveInstrumentsBtn.count {
             if saveInstrumentsBtn[i] == strData {
                 saveInstrumentsBtn.remove(at: i)
@@ -1526,23 +1645,23 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                 saveInstrumentsBtnInt.append(indexPath.item+1)
             }
         }
-               
-print(saveInstrumentsBtn)
+        
+        print(saveInstrumentsBtn)
         print(saveInstrumentsBtnInt)
-                collectionView.reloadData()
-            
+        collectionView.reloadData()
+        
     }
-
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-        {
-            //print(self.sizeWidthCellInstruments[indexPath.row].width+20)
-            return CGSize(width: self.sizeWidthCellInstruments[indexPath.row].width+20, height: 30)
-        }
-
-      /*  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-        {
-            return UIEdgeInsets(top: 20, left: 8, bottom: 5, right: 8)
-        }*/
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        //print(self.sizeWidthCellInstruments[indexPath.row].width+20)
+        return CGSize(width: self.sizeWidthCellInstruments[indexPath.row].width+20, height: 30)
+    }
+    
+    /*  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
+     {
+     return UIEdgeInsets(top: 20, left: 8, bottom: 5, right: 8)
+     }*/
 }
 
 extension MainViewController: SettingsViewControllerDelegate {
@@ -1565,20 +1684,20 @@ extension UIImage {
         // Trim off the extremely small float value to prevent core graphics from rounding it up
         newSize.width = floor(newSize.width)
         newSize.height = floor(newSize.height)
-
+        
         UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
         let context = UIGraphicsGetCurrentContext()!
-
+        
         // Move origin to middle
         context.translateBy(x: newSize.width/2, y: newSize.height/2)
         // Rotate around middle
         context.rotate(by: CGFloat(radians))
         // Draw the image at its center
         self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
-
+        
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return newImage
     }
 }

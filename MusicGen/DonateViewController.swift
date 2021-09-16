@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import StoreKit
 
 
-class DonateViewController: UIViewController {
+class DonateViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+    
+    
     
     //MARK: - PROPERTIES
+    var myProduct: SKProduct?
+
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -80,9 +85,51 @@ class DonateViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configure()
+        fetchProduct()
+       
     }
     
     //MARK: - HELPER FUNCTIONS
+    func fetchProduct() {
+        let request = SKProductsRequest(productIdentifiers: ["DonateTest"])
+        request.delegate = self
+        request.start()
+    }
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        print("myProduct")
+        if let product = response.products.first {
+            myProduct = product
+            print("myProduct = \(product.productIdentifier)")
+            print(product.price)
+            print(product.localizedTitle)
+            print(product.localizedDescription)
+        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchasing:
+                //
+            break
+            case .purchased, .restored:
+            //
+                SKPaymentQueue.default().finishTransaction(transaction)
+                SKPaymentQueue.default().remove(self)
+            break
+            case .failed, .deferred:
+                //
+                SKPaymentQueue.default().finishTransaction(transaction)
+                SKPaymentQueue.default().remove(self)
+            break
+            default:
+                SKPaymentQueue.default().finishTransaction(transaction)
+                SKPaymentQueue.default().remove(self)
+                break
+            }
+        }
+    }
+    
     func configure() {
         let headerView = HeaderView()
         headerView.frame = CGRect.init(x: 0, y: 0, width: Constants.screenSize.width, height: 60)
@@ -130,18 +177,16 @@ class DonateViewController: UIViewController {
     @objc func smallDonateBtnPressed() {
         resetAllBtn()
         nextBtn.setTitle("Donate 3.00$", for: .normal)
-        RazeFaceProducts.SwiftShopping  = "Donate"
         smallDonateBtn.backgroundColor = .purpleApp
-        RazeFaceProducts.store.requestProducts{ [weak self] success, products in
-          guard self != nil else { return }
-          if success {
-               print("DEBUG: buy")
-              
-          } else {
-              print("DEBUG: Not buy")
-          }
-          
-        }
+        let request = SKProductsRequest(productIdentifiers: ["Donate"])
+        request.delegate = self
+        request.start()
+       /* RazeFaceProducts.SwiftShopping  = "Donate"
+        
+        guard let product = products.first else { return }
+        RazeFaceProducts.store.buyProduct(product)*/
+        
+        
         
     }
     
@@ -149,40 +194,34 @@ class DonateViewController: UIViewController {
         resetAllBtn()
         nextBtn.setTitle("Donate 6.00$", for: .normal)
         mediumDonateBtn.backgroundColor = .purpleApp
-        
-        RazeFaceProducts.SwiftShopping  = "DonateMedium"
-        RazeFaceProducts.store.requestProducts{ [weak self] success, products in
-          guard self != nil else { return }
-          if success {
-               print("DEBUG: buy")
-              
-          } else {
-              print("DEBUG: Not buy")
-          }
-          
-        }
+        let request = SKProductsRequest(productIdentifiers: ["DonateMedium"])
+        request.delegate = self
+        request.start()
+     /*   RazeFaceProducts.SwiftShopping  = "DonateMedium"
+        guard let product = products.first else { return }
+        RazeFaceProducts.store.buyProduct(product)*/
     }
     
     @objc func highDonateBtnPressed() {
         resetAllBtn()
         nextBtn.setTitle("Donate 10.00$", for: .normal)
         highDonateBtn.backgroundColor = .purpleApp
+        let request = SKProductsRequest(productIdentifiers: ["DonateBig"])
+        request.delegate = self
+        request.start()
         
-        RazeFaceProducts.SwiftShopping  = "DonateBig"
-        RazeFaceProducts.store.requestProducts{ [weak self] success, products in
-          guard self != nil else { return }
-          if success {
-               print("DEBUG: buy")
-              
-          } else {
-              print("DEBUG: Not buy")
-          }
-          
-        }
+     /*   RazeFaceProducts.SwiftShopping  = "DonateBig"
+        guard let product = products.first else { return }
+        RazeFaceProducts.store.buyProduct(product)*/
     }
     
     @objc func nextBtnPressed() {
-       
+        guard let product = myProduct else { return }
+        if SKPaymentQueue.canMakePayments() {
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.default().add(self)
+            SKPaymentQueue.default().add(payment)
+        } 
         //let myNavigationController = UINavigationController(rootViewController: donateScreen)
         //donateScreen.modalPresentationStyle = .fullScreen
       /*  let controller = PaymentDetailsViewController()

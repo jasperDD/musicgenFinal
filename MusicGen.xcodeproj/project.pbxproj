@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A06818626E0DB6B0087A379 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A06818526E0DB6B0087A379 /* StoreKit.framework */; };
 		0A2D78242683926D0086F44C /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D78232683926D0086F44C /* Instruments.swift */; };
 		0A42BD74268B0D4E00F3A9F0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BD73268B0D4E00F3A9F0 /* API.swift */; };
 		0A42BD76268B0F8300F3A9F0 /* MusicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BD75268B0F8300F3A9F0 /* MusicModel.swift */; };
@@ -14,6 +15,7 @@
 		0A4B007626B3E47700E4AD64 /* gilroy-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A4B007526B3E47700E4AD64 /* gilroy-semibold.ttf */; };
 		0A4B00C826C79A20004C4E5C /* CreateMidi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B00C726C79A20004C4E5C /* CreateMidi.swift */; };
 		0A4B00CA26C79A77004C4E5C /* CreateMidis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B00C926C79A77004C4E5C /* CreateMidis.swift */; };
+		0A5461E026DE5ABD006BB422 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5461DF26DE5ABD006BB422 /* ForgotPasswordController.swift */; };
 		0A568FAE26B8248E0020DC46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A568FAD26B8248E0020DC46 /* SettingsViewController.swift */; };
 		0A57EA01268488470040A7A8 /* Gilroy-FREE in Resources */ = {isa = PBXBuildFile; fileRef = 0A57EA00268488470040A7A8 /* Gilroy-FREE */; };
 		0A57EA032684A1BC0040A7A8 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57EA022684A1BC0040A7A8 /* Genres.swift */; };
@@ -65,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A06818526E0DB6B0087A379 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A2D78232683926D0086F44C /* Instruments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
 		0A42BD73268B0D4E00F3A9F0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0A42BD75268B0F8300F3A9F0 /* MusicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModel.swift; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 		0A4B007526B3E47700E4AD64 /* gilroy-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-semibold.ttf"; path = "MusicGen/gilroyFont/gilroy-semibold.ttf"; sourceTree = SOURCE_ROOT; };
 		0A4B00C726C79A20004C4E5C /* CreateMidi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMidi.swift; sourceTree = "<group>"; };
 		0A4B00C926C79A77004C4E5C /* CreateMidis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMidis.swift; sourceTree = "<group>"; };
+		0A5461DF26DE5ABD006BB422 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
 		0A568FAD26B8248E0020DC46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A57EA00268488470040A7A8 /* Gilroy-FREE */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Gilroy-FREE"; sourceTree = "<group>"; };
 		0A57EA022684A1BC0040A7A8 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87B407B3037D5ABF6AAFEE93 /* Pods_MusicGen.framework in Frameworks */,
+				0A06818626E0DB6B0087A379 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +193,7 @@
 				0A568FAD26B8248E0020DC46 /* SettingsViewController.swift */,
 				0A6190332672020B00A001E1 /* MainViewController.swift */,
 				0AE636E126A80150004D7182 /* InstrumentsCollectionViewCell.swift */,
+				0A5461DF26DE5ABD006BB422 /* ForgotPasswordController.swift */,
 				0A77D487269D88C30080167B /* AudioPlayerView.swift */,
 				0A6190432672038F00A001E1 /* LoginViewController.swift */,
 				0A61904726720D2000A001E1 /* SignUpViewController.swift */,
@@ -288,6 +294,7 @@
 		629B9870373225FCF2AE9EF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A06818526E0DB6B0087A379 /* StoreKit.framework */,
 				91F7EA54859A99BFA91E47E0 /* Pods_MusicGen.framework */,
 			);
 			name = Frameworks;
@@ -439,6 +446,7 @@
 				0A2D78242683926D0086F44C /* Instruments.swift in Sources */,
 				0AAB840726BA764000E360BC /* HelperFunctions.swift in Sources */,
 				0A77D488269D88C30080167B /* AudioPlayerView.swift in Sources */,
+				0A5461E026DE5ABD006BB422 /* ForgotPasswordController.swift in Sources */,
 				0A568FAE26B8248E0020DC46 /* SettingsViewController.swift in Sources */,
 				0A4B00C826C79A20004C4E5C /* CreateMidi.swift in Sources */,
 				0A57EA032684A1BC0040A7A8 /* Genres.swift in Sources */,
@@ -607,6 +615,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MusicGen/MusicGen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C9B6324J22;
 				INFOPLIST_FILE = MusicGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -628,6 +637,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MusicGen/MusicGen.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C9B6324J22;
 				INFOPLIST_FILE = MusicGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

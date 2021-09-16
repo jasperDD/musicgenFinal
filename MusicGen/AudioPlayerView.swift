@@ -14,7 +14,19 @@ class AudioPlayerView: UIView {
     
     //MARK: - PROPERTIES
     var player:AVPlayer?
-      var playerItem:AVPlayerItem?
+    var playerItem:AVPlayerItem?
+    var realTimeTrack = 0 {
+        didSet {
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: realTimeTrack)
+            var seconds = "00"
+            if s < 10 {
+                seconds = "0\(s)"
+            } else {
+                seconds = "\(s)"
+            }
+            timeRunTitle.text = "\(m):\(seconds)"
+        }
+    }
     var urlTrack = "http://147.182.236.169/files?file_name=data%2Fresults%2FeJAyuIFSTtPFPukZhaMkHjV98hc2/ai2_50_arabic_18-08-2021-06-43-08_CONVERT_MID_TO_WAV.mp3"//"https://s3.amazonaws.com/kargopolov/kukushka.mp3" //"http://147.182.236.169/files?file_name=data%2Fresults%2Ffcb4d1ed-7d1b-482b-baf6-08e0035649fc_CONVERT_MID_TO_WAV.wav"
     //"https://s3.amazonaws.com/kargopolov/kukushka.mp3"
     
@@ -25,6 +37,16 @@ class AudioPlayerView: UIView {
         //button.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
         return button
     }()
+    
+    let timeRunTitle: UILabel = {
+        let label = UILabel()
+        label.text = "0:00"
+        label.font = UIFont(name: "Gilroy-SemiBold", size: 12)
+        label.textColor = .orangeApp
+        return label
+    }()
+    
+    
     
     /* private var progressBarHighlightedObserver: NSKeyValueObservation?
         
@@ -103,6 +125,20 @@ class AudioPlayerView: UIView {
                // playbackSlider.addTarget(self, action: "playbackSliderValueChanged:", forControlEvents: .ValueChanged)
                 self.addSubview(playbackSlider)
         playbackSlider.anchor(top: self.topAnchor, paddingTop: 0, width: Constants.screenSize.width-40, height: 20)
+        
+        //time show
+        let timeTitle = UILabel()
+        let (h,m,s) = secondsToHoursMinutesSeconds(seconds: globalSeconds)
+        timeTitle.text = "\(m):\(s)"
+        timeTitle.font = UIFont(name: "Gilroy-SemiBold", size: 12)
+        timeTitle.textColor = .orangeApp
+        self.addSubview(timeTitle)
+        timeTitle.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 20, paddingRight: 0, width: 30, height: 20)
+        
+        //timer run show
+        self.addSubview(timeRunTitle)
+        timeRunTitle.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 20, paddingLeft: 0, width: 30, height: 20)
+      
 
         // Invoke callback every second
         let interval = CMTime(seconds:1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
@@ -113,6 +149,7 @@ class AudioPlayerView: UIView {
         // Keep the reference to remove
         var playerObserv = player?.addPeriodicTimeObserver(forInterval: interval, queue: mainQueue) { time in
             print(time.seconds)
+            self.realTimeTrack = Int(time.seconds)
             playbackSlider.setValue(Float(time.seconds), animated: true)
         }
     }
@@ -124,6 +161,10 @@ class AudioPlayerView: UIView {
     }
     
     //MARK: - HELPER FUNCTION
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+    
     @objc func playbackSliderValueChanged(_ playbackSlider:UISlider)
         {
             
@@ -158,27 +199,4 @@ class AudioPlayerView: UIView {
                 playButton.setImage(image, for: .normal)
             }
         }
-    
-  
-    
 }
-/*extension UIImage {
-    func addRoundBorder(width: CGFloat,
-                        color: UIColor) -> UIImage {
-        let square = CGSize(width: min(size.width, size.height) + width * 2,
-                            height: min(size.width, size.height) + width * 2)
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: square))
-        imageView.contentMode = .center
-        imageView.image = self
-        imageView.layer.cornerRadius = square.width / 2
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = width
-        imageView.layer.borderColor = color.cgColor
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return self }
-        imageView.layer.render(in: context)
-        let result = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return result ?? self
-    }
-}*/
