@@ -91,7 +91,7 @@ class DonateViewController: UIViewController, SKProductsRequestDelegate, SKPayme
     
     //MARK: - HELPER FUNCTIONS
     func fetchProduct() {
-        let request = SKProductsRequest(productIdentifiers: ["DonateTest"])
+        let request = SKProductsRequest(productIdentifiers: ["Donate"])
         request.delegate = self
         request.start()
     }

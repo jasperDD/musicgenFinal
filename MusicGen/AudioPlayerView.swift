@@ -75,8 +75,9 @@ class AudioPlayerView: UIView {
             customView.backgroundColor = UIColor.white     //give color to the view
            
             self.addSubview(customView)*/
+        let newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%", options: .literal, range: nil)
+        let url = URL(string: newURLString)
         
-        let url = URL(string: globalMidiUrl)
                 let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
                 player = AVPlayer(playerItem: playerItem)
                 

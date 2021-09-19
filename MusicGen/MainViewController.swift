@@ -1094,7 +1094,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
             
             // create post request
             print("sliderStepAi = \(sliderStepAi)")
-            let url = URL(string: "http://147.182.236.169/generate?gen_type=ai\(self.sliderStepAi)")!
+            let url = URL(string: "http://147.182.236.169/songs?gen_type=ai\(self.sliderStepAi)")!
            
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
