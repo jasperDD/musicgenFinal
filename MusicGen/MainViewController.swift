@@ -19,8 +19,10 @@ import MediaPlayer
 
 var products: [SKProduct] = []
 var productPrice = "0"
-var globalMidiUrl = "http://147.182.236.169/files?file_name=data%2Fresults%2FeJAyuIFSTtPFPukZhaMkHjV98hc2/ai2_180_rock_23-08-2021-17-57-24_CONVERT_MID_TO_WAV.mp3"
+var globalMidiUrl = "http://147.182.236.169/files?file_name=data%2Fresults%2FeJAyuIFSTtPFPukZhaMkHjV98hc2/ai2_180_rock_23-08-2021-17-57-24_CONVERT_MID_TO_WAV.mp3" //"http://147.182.236.169/files?file_name=%2Fapp%2Fdata%2Fresults%2FWH2OrrClocO7ZiF8Jq8muUmSjse2/Into Battle - клавиши и метроном_ai4_revert_invert_None_rock_07-10-2021-10-22-54_midi_to_mp3.mp3"
+//http://147.182.236.169/files?file_name=%2Fapp%2Fdata%2Fresults%2FWH2OrrClocO7ZiF8Jq8muUmSjse2/HOT_GIRL_ai4_revert_invert_None_rock_07-10-2021-09-14-40_midi_to_mp3.mp3
 var globalSeconds = 0
+
 
 
 class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPlayerDelegate, MPMediaPickerControllerDelegate {
@@ -191,7 +193,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     let addChardsView = UIView()
     var timer: Timer?
     
-    var sliderStepAi = 1
+    var sliderStepAi = 3
     var genres = "rock"
     var bpmValue = 180
     var midiFilename = String()
@@ -357,6 +359,50 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     
     let modelName = UIDevice.modelName
     
+    //ScrollView
+    
+    let scrollView: UIScrollView = {
+            let v = UIScrollView()
+            v.translatesAutoresizingMaskIntoConstraints = false
+            v.backgroundColor = .clear
+            return v
+        }()
+    
+    
+    
+    var listFontsView = UIView()
+    var musicFontsBtn = [UIButton]()
+
+        
+       
+        
+        let label1: UILabel = {
+            let label = UILabel()
+            label.text = "Choose the music fonts"
+            label.numberOfLines = 0
+            label.sizeToFit()
+            label.textColor = UIColor.white
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+       
+    
+        let contentView = UIView()
+    var arrayMusicFonts = [String]()
+    
+    var instrumentsAvailableForCV = [String]()
+    var currentMusicFont = String() {
+        didSet {
+            instrumentsCollectionView.reloadData()
+            contentView.removeFromSuperview()
+            scrollView.removeFromSuperview()
+        }
+    }
+   
+    
+    //MARK: - LIFE CYCLE
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -457,6 +503,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         catch { print("already logged out") }
         
     }
+  
     
     func createSpinnerView() {
         let child = SpinnerLoaderView()
@@ -466,7 +513,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         child.view.frame = view.frame
         view.addSubview(child.view)
         child.didMove(toParent: self)
-
+        child.view.alpha = 0.5
         // wait two seconds to simulate some work happening
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             // then remove the spinner view controller
@@ -591,7 +638,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         aiSlider.maximumValue = 3
         aiSlider.isContinuous = true
         aiSlider.tintColor = UIColor.orangeApp
-        aiSlider.value = 0
+        aiSlider.value = 2
         controlAiView.addSubview(aiSlider)
         aiSlider.addTarget(self, action: #selector(self.sliderValueDidChange(_:)), for: .valueChanged)
         aiSlider.setThumbImage( UIImage(named: "Line1X"), for: .normal)
@@ -805,6 +852,63 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     }
     
     //MARK: - SELECTORS
+    
+    @objc func musicFontsBtnPressed(sender:UIButton) {
+        print(sender.tag)
+        instrumentsAvailableForCV.removeAll()
+       
+        for i in 0..<arrayMusicFonts.count {
+            if i == sender.tag {
+                print("arrayMusicFonts = \(arrayMusicFonts[i])")
+                currentMusicFont = arrayMusicFonts[i]
+                guard let strURL = URL(string: "http://147.182.236.169/fonts/instruments?font_type=\(arrayMusicFonts[i])") else { return }
+                print("strURL = \(strURL)")
+                
+                //let headers: HTTPHeaders =  [ "id-token" : "\(self.idToken)"]
+                
+                AF.request( strURL, method: .get).responseJSON { response in
+                    
+                    switch (response.result) {
+                    case .success(let json):
+                       // print("success2 = \(json)")
+                        
+                        if let instrumentsAvailable = json as? [String] {
+                            //print("instrumentsAvailable = \(instrumentsAvailable.first)")
+                            let string = (instrumentsAvailable.first ?? "") as String
+                            for i in 0..<self.instumentsArray.count {
+                                let instrString = self.instumentsArray[i] as String
+                            
+
+                                if string.range(of:"\(instrString)", options: .caseInsensitive) != nil {
+                                print("exists = \(instrString)")
+                                    if instrString != "" {
+                                        self.instrumentsAvailableForCV.append(instrString)
+                                    }
+                            }
+                            }
+                            
+                            self.instrumentsCollectionView.reloadData()
+                            self.contentView.removeFromSuperview()
+                            self.scrollView.removeFromSuperview()
+                        }
+                       
+                    case .failure(let error):
+                        print(error)
+                        print("error = \(error)")
+                        self.instrumentsCollectionView.reloadData()
+                        self.contentView.removeFromSuperview()
+                        self.scrollView.removeFromSuperview()
+                        let alert = UIAlertController(title: "We apologize", message: "Could not connect to the server. Check your network connection.", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+        
+       
+    }
+    
     @objc func donateBtnPressed() {
         
         // self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -819,7 +923,29 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     
     @objc func shareBtnPressed() {
         let someText:String = "Hello want to share music link from BIT App"
-            let objectsToShare:URL = URL(string: "\(globalMidiUrl)")!
+        var newURLString = String()
+        var objectsToShare: URL?
+        if globalMidiUrl.isLatin && !globalMidiUrl.isBothLatinAndCyrillic {
+            // String is latin
+            print("isLatin = true")
+            newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+           // newURLString.encodeUrl
+            objectsToShare = URL(string: newURLString)!
+        } else if globalMidiUrl.isCyrillic  {
+            // String is cyrillic
+            print("isLatin = false")
+        } else if globalMidiUrl.isBothLatinAndCyrillic {
+            // String can be either latin or cyrillic
+            print("isLatin = true and cyrillic = true")
+        } else {
+            // String is not latin nor cyrillic
+            print("isLatin2 = true and cyrillic2 = true")
+            newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+            let newNewStr = newURLString.encodeUrl
+            let finishUrl = newNewStr.replacingOccurrences(of: "%25", with: "%", options: .literal, range: nil)
+            objectsToShare = URL(string: finishUrl)!
+        }
+            //let objectsToShare:URL = URL(string: "\(globalMidiUrl)")!
             let sharedObjects:[AnyObject] = [objectsToShare as AnyObject,someText as AnyObject]
             let activityViewController = UIActivityViewController(activityItems : sharedObjects, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
@@ -847,6 +973,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     @objc func sliderValueDidChange(_ sender:UISlider!)
     {
         print("Slider value changed")
+        //clear all clicked instruments
+        arrSelectedIndex.removeAll()
+        arrSelectedData.removeAll()
+        saveInstrumentsBtn.removeAll()
+        saveInstrumentsBtnInt.removeAll()
+        arrayMusicFonts.removeAll()
         
         // Use this code below only if you want UISlider to snap to values step by step
         let roundedStepValue = round(sender.value / step) * step
@@ -854,7 +986,105 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         
         print("Slider step value \(Int(roundedStepValue))")
         sliderStepAi = Int(roundedStepValue) + 1
-        print(sliderStepAi)
+        print("Slider step value2 = \(sliderStepAi)")
+        let child = SpinnerLoaderView()
+
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        child.view.alpha = 0.1
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // then remove the spinner view controller
+            if self.sliderStepAi == 3 || self.sliderStepAi == 4 {
+                child.willMove(toParent: nil)
+                child.view.removeFromSuperview()
+                child.removeFromParent()
+                self.instrumentsCollectionView.reloadData()
+            }
+            if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+                
+                guard let strURL = URL(string: "http://147.182.236.169/fonts") else { return }
+                
+                let headers: HTTPHeaders =  [ "id-token" : "\(self.idToken)"]
+
+                AF.request( strURL, method: .get, headers: headers).responseJSON { response in
+                    debugPrint(response)
+                    
+                    switch (response.result) {
+                    case .success(let json):
+                        print("success = \(json)")
+                        
+                               child.willMove(toParent: nil)
+                               child.view.removeFromSuperview()
+                               child.removeFromParent()
+                        if let arrayFonts = json as? [String] {
+                           
+                            
+                            self.arrayMusicFonts = arrayFonts
+                           
+                            self.view.addSubview( self.scrollView)
+                            self.scrollView.addSubview( self.contentView)
+                            
+                            self.scrollView.centerXAnchor.constraint(equalTo:  self.view.centerXAnchor).isActive = true
+                            self.scrollView.widthAnchor.constraint(equalTo:  self.view.widthAnchor).isActive = true
+                            self.scrollView.topAnchor.constraint(equalTo:  self.view.topAnchor).isActive = true
+                            self.scrollView.bottomAnchor.constraint(equalTo:  self.view.bottomAnchor).isActive = true
+                            
+                            self.contentView.centerXAnchor.constraint(equalTo:  self.scrollView.centerXAnchor).isActive = true
+                            self.contentView.widthAnchor.constraint(equalTo:  self.scrollView.widthAnchor).isActive = true
+                            self.contentView.topAnchor.constraint(equalTo:  self.scrollView.topAnchor).isActive = true
+                            self.contentView.bottomAnchor.constraint(equalTo:  self.scrollView.bottomAnchor).isActive = true
+                            self.contentView.anchor(top: self.scrollView.topAnchor, left: self.scrollView.leftAnchor, right: self.scrollView.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingRight: 10, width: self.scrollView.frame.width, height: 40 + CGFloat(45*arrayFonts.count))
+                        
+                            self.scrollView.backgroundColor = .black
+                            
+                            
+                            self.contentView.addSubview(self.label1)
+                            self.label1.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+                            self.label1.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+                            self.label1.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 3/4).isActive = true
+                            self.label1.textAlignment = .center
+                            self.label1.font = UIFont(name: "Gilroy-SemiBold", size: 18)
+                            self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 40 + CGFloat(45*arrayFonts.count))
+                            
+                            
+                           for i in 0..<arrayFonts.count {
+                                
+                                let button = AuthButton(type: .system)
+                                self.musicFontsBtn.append(button)
+                                self.musicFontsBtn[i].setTitle("\(arrayFonts[i])", for: .normal)
+                                self.musicFontsBtn[i].titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+                                self.musicFontsBtn[i].titleLabel?.font = UIFont(name: "Gilroy-SemiBold", size: 12)
+                                self.musicFontsBtn[i].setTitleColor(UIColor.orangeApp, for: .normal)
+                                self.musicFontsBtn[i].tag = i
+                                self.musicFontsBtn[i].addTarget(self, action: #selector(self.musicFontsBtnPressed), for: .touchUpInside)
+                                self.contentView.addSubview(self.musicFontsBtn[i])
+                                self.musicFontsBtn[i].anchor(top: self.contentView.topAnchor, left: self.contentView.leftAnchor, right: self.contentView.rightAnchor, paddingTop: 40 + CGFloat(45*i), paddingLeft: 10, paddingRight: 10, width: self.contentView.frame.width, height: 35)
+                            }
+                          
+                            
+                            
+                        }
+                    case .failure(let error):
+                        print(error)
+                        print("error = \(error)")
+                        
+                               child.willMove(toParent: nil)
+                               child.view.removeFromSuperview()
+                               child.removeFromParent()
+                        let alert = UIAlertController(title: "We apologize", message: "Could not connect to the server. Check your network connection.", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            } else {
+                self.instrumentsCollectionView.reloadData()
+            }
+        }
+        
+        
     }
     
     @objc func downloadBtnPressed() {
@@ -862,9 +1092,30 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
         createSpinnerView()
         
         var url = URL(string: globalMidiUrl)
+        var newURLString = String()
+        var finishUrl = String()
+        if globalMidiUrl.isLatin && !globalMidiUrl.isBothLatinAndCyrillic {
+            // String is latin
+            print("isLatin = true")
+           // finishUrl = globalMidiUrl.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+            //url = URL(string: newURLString)!
+        } else if globalMidiUrl.isCyrillic  {
+            // String is cyrillic
+            print("isLatin = false")
+        } else if globalMidiUrl.isBothLatinAndCyrillic {
+            // String can be either latin or cyrillic
+            print("isLatin = true and cyrillic = true")
+        } else {
+            // String is not latin nor cyrillic
+            print("isLatin2 = true and cyrillic2 = true")
+            newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+            let newNewStr = newURLString.encodeUrl
+            finishUrl = newNewStr.replacingOccurrences(of: "%25", with: "%", options: .literal, range: nil)
+            url = URL(string: finishUrl)!
+        }
         // let downloadedURL = "https://s3.amazonaws.com/kargopolov/kukushka.mp3"
-        print(globalMidiUrl)
-        if let audioUrl = URL(string: globalMidiUrl) {
+        //print(globalMidiUrl)
+        if let audioUrl = URL(string: finishUrl) {
             // create your document folder url
             let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             // your destination file url
@@ -1168,6 +1419,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
             
         }
         if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+            
             var allSeconds = 0
             if hoursLabel.text != "0" {
                 let seconds = Int(minutesLabel.text!)
@@ -1230,14 +1482,27 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
                 
             }
             // prepare json data
-            let json: [String: Any] = ["change_instruments": [
-                "track_1": track_1,
-                "track_2": track_2,
-                "track_3": track_3,
-                "track_4": track_4,
-                "track_5": track_5
-            ],
-            "add_chords": add_chords, "add_drums": true, "set_bpm": self.bpmValue, "modify_length": globalSeconds, "genre": "pop"]
+            var json: [String: Any]
+            if instrumentsAvailableForCV.count > 0 {
+                json = ["change_instruments": [
+                    "track_1": track_1,
+                    "track_2": track_2,
+                    "track_3": track_3,
+                    "track_4": track_4,
+                    "track_5": track_5
+                ],
+                "add_chords": add_chords, "add_drums": true, "set_bpm": self.bpmValue, "modify_length": globalSeconds, "genre": "pop", "soundfonts": "\(currentMusicFont)"]
+            } else {
+                json = ["change_instruments": [
+                    "track_1": track_1,
+                    "track_2": track_2,
+                    "track_3": track_3,
+                    "track_4": track_4,
+                    "track_5": track_5
+                ],
+                "add_chords": add_chords, "add_drums": true, "set_bpm": self.bpmValue, "modify_length": globalSeconds, "genre": "pop"]
+            }
+            
             print("json = \(json)")
             
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
@@ -1320,7 +1585,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
     var audioPlayers = AudioPlayerView()
     
     @objc func getSongsBtnPressed() {
-        print("GENERATE BTN")
+        print("getSongs BTN")
         
         
         // guard let strURL = URL(string: "http://147.182.236.169/songs?gen_type=ai\(self.sliderStepAi)") else { return }
@@ -1412,11 +1677,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
                 //http://147.182.236.169/files?file_name=%2Fapp%2Fdata%2Fresults%2FWH2OrrClocO7ZiF8Jq8muUmSjse2/ai1_180_country_13-09-2021-05-56-27_midi_to_mp3.mp3
                 let player = AudioPlayerView()
                 self.audioPlayers = player
-                // player.urlTrack = "http://147.182.236.169/files?file_name=data%2Fresults%2F\(self.midiFilename)_CONVERT_MID_TO_WAV.mp3"
+              
                 print("url midi track =\(globalMidiUrl)")
+                player.delegate = self
                 self.view.addSubview(player)
                 
-                player.player!.pause()
+                player.player?.pause()
                 let image = UIImage(named: "play1X")
                 player.playButton.setImage(image, for: .normal)
                 player.anchor(top: self.barDown.topAnchor, paddingTop: -20, width: Constants.screenSize.width-40, height: 70)
@@ -1445,7 +1711,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, AVAudioPla
                 self.timer?.invalidate()
                 
             case .failure(let error):
-                print(error)
+                print("error = \(error)")
+                let alert = UIAlertController(title: "We apologize", message: "Could not connect to the server. Check your network connection.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                self.generateBtn.isHidden = false
+                self.percentLoadLabel.text = "0%"
+                progressView.removeFromSuperview()
+                self.timer?.invalidate()
             }
             
         }
@@ -1568,15 +1841,24 @@ extension MainViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return Instruments.allCases.count
+        if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+            return instrumentsAvailableForCV.count
+        } else {
+            return Instruments.allCases.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InstrumentsCollectionViewCell
         //if collectionView == instrumentsCollectionView {
-        
-        cell.instrumentLabel.text = "\(Instruments.statusList[indexPath.row])"
+        if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+            cell.instrumentLabel.text = "\(instrumentsAvailableForCV[indexPath.row])"
+        } else {
+            cell.instrumentLabel.text = "\(Instruments.statusList[indexPath.row])"
+        }
+       
         cell.addShadow()
         //cell.instrumentLabel.frame.width = self.sizeWidthCellInstruments.width
         //   cell.frame.width = self.sizeWidthCellInstruments.width
@@ -1597,9 +1879,22 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         else {
             cell.backgroundColor = UIColor.purpleApp
         }
-        
-        
-        
+       /* if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+            for i in 0..<instrumentsAvailableForCV.count {
+                if cell.instrumentLabel.text == instrumentsAvailableForCV[i] {
+                    cell.isHidden = false
+                } else {
+                    cell.isHidden = true
+                    cell.frame.size.width = 0
+                }
+            }
+        }
+        if self.sliderStepAi == 3 || self.sliderStepAi == 4 {
+           // for i in 0..<instrumentsAvailableForCV.count {
+                cell.isHidden = false
+           // cell.frame.size.width = 100
+          //  }
+        }*/
         
         return cell
     }
@@ -1608,9 +1903,13 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         print("User tapped on item \(indexPath.row)")
         
         print("You selected cell #\(indexPath.item)!")
-        
-        
-        let strData = Instruments.statusList[indexPath.item]
+        var strData = String()
+        if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+             strData = instrumentsAvailableForCV[indexPath.item]
+        } else {
+             strData = Instruments.statusList[indexPath.item]
+        }
+       
         for i in 0..<saveInstrumentsBtn.count {
             if saveInstrumentsBtn[i] == strData {
                 saveInstrumentsBtn.remove(at: i)
@@ -1630,7 +1929,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             else {
                 arrSelectedIndex.append(indexPath)
                 arrSelectedData.append(strData)
-                saveInstrumentsBtn.append("\(Instruments.statusList[indexPath.item])")
+                if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+                    saveInstrumentsBtn.append("\(instrumentsAvailableForCV[indexPath.item])")
+                } else {
+                    saveInstrumentsBtn.append("\(Instruments.statusList[indexPath.item])")
+                }
+                
                 saveInstrumentsBtnInt.append(indexPath.item+1)
             }
         } else {
@@ -1641,7 +1945,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             else {
                 arrSelectedIndex.append(indexPath)
                 arrSelectedData.append(strData)
-                saveInstrumentsBtn.append("\(Instruments.statusList[indexPath.item])")
+                if self.sliderStepAi == 1 || self.sliderStepAi == 2 {
+                    saveInstrumentsBtn.append("\(instrumentsAvailableForCV[indexPath.item])")
+                } else {
+                    saveInstrumentsBtn.append("\(Instruments.statusList[indexPath.item])")
+                }
+                //saveInstrumentsBtn.append("\(Instruments.statusList[indexPath.item])")
                 saveInstrumentsBtnInt.append(indexPath.item+1)
             }
         }
@@ -1649,6 +1958,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         print(saveInstrumentsBtn)
         print(saveInstrumentsBtnInt)
         collectionView.reloadData()
+        
         
     }
     
@@ -1675,7 +1985,15 @@ extension MainViewController: SettingsViewControllerDelegate {
     
     
 }
-
+extension MainViewController: AudioPlayerViewDelegate {
+    func audioCheckGlobal() {
+        let alert = UIAlertController(title: "We apologize", message: "Something went wrong. Check your network connection.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+}
 
 
 extension UIImage {
@@ -1701,5 +2019,6 @@ extension UIImage {
         return newImage
     }
 }
+
 
 

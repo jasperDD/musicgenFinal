@@ -8,13 +8,16 @@
 import AVFoundation
 import UIKit
 
-
+protocol AudioPlayerViewDelegate: AnyObject {
+    func audioCheckGlobal()
+}
 
 class AudioPlayerView: UIView {
     
     //MARK: - PROPERTIES
     var player:AVPlayer?
     var playerItem:AVPlayerItem?
+    weak var delegate: AudioPlayerViewDelegate?
     var realTimeTrack = 0 {
         didSet {
             let (h,m,s) = secondsToHoursMinutesSeconds(seconds: realTimeTrack)
@@ -64,7 +67,7 @@ class AudioPlayerView: UIView {
         }
         return bar
     }()*/
-
+    var url: URL?
     
     //MARK: - LIFECYCLE
     override init(frame: CGRect) {
@@ -73,86 +76,127 @@ class AudioPlayerView: UIView {
         /*let customView = UIView()
         customView.frame = CGRect.init(x: 0, y: 0, width: Constants.screenSize.width, height: 100)
             customView.backgroundColor = UIColor.white     //give color to the view
-           
+    
             self.addSubview(customView)*/
-        let newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%", options: .literal, range: nil)
-        let url = URL(string: newURLString)
+        var newURLString = String()
         
-                let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
-                player = AVPlayer(playerItem: playerItem)
-                
-                let playerLayer=AVPlayerLayer(player: player!)
-                playerLayer.frame=CGRect(x:0, y:0, width:10, height:50)
-                self.layer.addSublayer(playerLayer)
-        
-        
-                
-        self.addSubview(playButton)
-        playButton.anchor(top: self.topAnchor, paddingTop: 0, width: 100, height: 100)
-        playButton.centerX(inView: self)
-                //playButton!.addTarget(self, action: Selector("playButtonTapped:"), for: .touchUpInside)
-                playButton.addTarget(self, action: #selector(self.playButtonTapped(_:)), for: .touchUpInside)
-                
-                
-                
-                
-                // Add playback slider
-                
-                let playbackSlider = UISlider(frame:CGRect(x:10, y:300, width:Constants.screenSize.width-40, height:20))
-                playbackSlider.minimumValue = 0
-                
-                
-               // let duration : CMTime = playerItem.asset.duration
-        let timeIntvl: TimeInterval = TimeInterval(globalSeconds)
-        let cmTime = CMTime(seconds: timeIntvl, preferredTimescale: 1000000)
-                let seconds : Float64 = CMTimeGetSeconds(cmTime)//Float64 = CMTimeGetSeconds(duration)
-       
-                print("seconds = \(seconds)")
-                print("seconds globalSeconds = \(globalSeconds)")
-      /*  if globalSeconds <= 60 {
-            playbackSlider.maximumValue = Float(seconds)//Float(seconds)
+        if globalMidiUrl.isLatin && !globalMidiUrl.isBothLatinAndCyrillic {
+            // String is latin
+            print("isLatin = true")
+            newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+           // newURLString.encodeUrl
+            url = URL(string: newURLString)!
+        } else if globalMidiUrl.isCyrillic  {
+            // String is cyrillic
+            print("isLatin = false")
+        } else if globalMidiUrl.isBothLatinAndCyrillic {
+            // String can be either latin or cyrillic
+            print("isLatin = true and cyrillic = true")
         } else {
-            playbackSlider.maximumValue = Float(globalSeconds)//Float(seconds)
-        }*/
-        playbackSlider.maximumValue = Float(globalSeconds)
-        print("seconds playbackSlider.maximumValue = \(playbackSlider.maximumValue)")
-                playbackSlider.isContinuous = true
-                playbackSlider.tintColor = UIColor.purpleApp
-        playbackSlider.currentThumbImage?.withTintColor(UIColor.purpleApp)
-       let image = UIImage(named: "Knob")
-        playbackSlider.setThumbImage(image, for: .normal)
-                
-                playbackSlider.addTarget(self, action: #selector(self.playbackSliderValueChanged(_:)), for: .valueChanged)
-               // playbackSlider.addTarget(self, action: "playbackSliderValueChanged:", forControlEvents: .ValueChanged)
-                self.addSubview(playbackSlider)
-        playbackSlider.anchor(top: self.topAnchor, paddingTop: 0, width: Constants.screenSize.width-40, height: 20)
-        
-        //time show
-        let timeTitle = UILabel()
-        let (h,m,s) = secondsToHoursMinutesSeconds(seconds: globalSeconds)
-        timeTitle.text = "\(m):\(s)"
-        timeTitle.font = UIFont(name: "Gilroy-SemiBold", size: 12)
-        timeTitle.textColor = .orangeApp
-        self.addSubview(timeTitle)
-        timeTitle.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 20, paddingRight: 0, width: 30, height: 20)
-        
-        //timer run show
-        self.addSubview(timeRunTitle)
-        timeRunTitle.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 20, paddingLeft: 0, width: 30, height: 20)
-      
-
-        // Invoke callback every second
-        let interval = CMTime(seconds:1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-
-        // Queue on which to invoke the callback
-        let mainQueue = DispatchQueue.main
-
-        // Keep the reference to remove
-        var playerObserv = player?.addPeriodicTimeObserver(forInterval: interval, queue: mainQueue) { time in
-            print(time.seconds)
-            self.realTimeTrack = Int(time.seconds)
-            playbackSlider.setValue(Float(time.seconds), animated: true)
+            // String is not latin nor cyrillic
+            print("isLatin2 = true and cyrillic2 = true")
+            newURLString = globalMidiUrl.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+            //newURLString = globalMidiUrl
+            let newNewStr = newURLString.encodeUrl
+            let finishUrl = newNewStr.replacingOccurrences(of: "%25", with: "%", options: .literal, range: nil)
+            url = URL(string: finishUrl)!
+            
         }
+     
+ 
+          //  if newURLString.isValidURL {
+                // TODO
+                print("urlTrack2 = \(newURLString)")
+        print("urlTrack3 = \(url)")
+   
+        
+       
+         
+        DispatchQueue.main.async {
+      
+                
+            let playerItem:AVPlayerItem = AVPlayerItem(url: self.url!)
+            self.player = AVPlayer(playerItem: playerItem)
+                        
+            let playerLayer=AVPlayerLayer(player: self.player!)
+                        playerLayer.frame=CGRect(x:0, y:0, width:10, height:50)
+                        self.layer.addSublayer(playerLayer)
+                
+                
+                        
+            self.addSubview(self.playButton)
+            self.playButton.anchor(top: self.topAnchor, paddingTop: 0, width: 100, height: 100)
+            self.playButton.centerX(inView: self)
+                        //playButton!.addTarget(self, action: Selector("playButtonTapped:"), for: .touchUpInside)
+            self.playButton.addTarget(self, action: #selector(self.playButtonTapped(_:)), for: .touchUpInside)
+                        
+                        
+                        
+                        
+                        // Add playback slider
+                        
+                        let playbackSlider = UISlider(frame:CGRect(x:10, y:300, width:Constants.screenSize.width-40, height:20))
+                        playbackSlider.minimumValue = 0
+                        
+                        
+                       // let duration : CMTime = playerItem.asset.duration
+                let timeIntvl: TimeInterval = TimeInterval(globalSeconds)
+                let cmTime = CMTime(seconds: timeIntvl, preferredTimescale: 1000000)
+                        let seconds : Float64 = CMTimeGetSeconds(cmTime)//Float64 = CMTimeGetSeconds(duration)
+               
+                        print("seconds = \(seconds)")
+                        print("seconds globalSeconds = \(globalSeconds)")
+              /*  if globalSeconds <= 60 {
+                    playbackSlider.maximumValue = Float(seconds)//Float(seconds)
+                } else {
+                    playbackSlider.maximumValue = Float(globalSeconds)//Float(seconds)
+                }*/
+                playbackSlider.maximumValue = Float(globalSeconds)
+                print("seconds playbackSlider.maximumValue = \(playbackSlider.maximumValue)")
+                        playbackSlider.isContinuous = true
+                        playbackSlider.tintColor = UIColor.purpleApp
+                playbackSlider.currentThumbImage?.withTintColor(UIColor.purpleApp)
+               let image = UIImage(named: "Knob")
+                playbackSlider.setThumbImage(image, for: .normal)
+                        
+                        playbackSlider.addTarget(self, action: #selector(self.playbackSliderValueChanged(_:)), for: .valueChanged)
+                       // playbackSlider.addTarget(self, action: "playbackSliderValueChanged:", forControlEvents: .ValueChanged)
+                        self.addSubview(playbackSlider)
+                playbackSlider.anchor(top: self.topAnchor, paddingTop: 0, width: Constants.screenSize.width-40, height: 20)
+                
+                //time show
+                let timeTitle = UILabel()
+            let (h,m,s) = self.secondsToHoursMinutesSeconds(seconds: globalSeconds)
+                timeTitle.text = "\(m):\(s)"
+                timeTitle.font = UIFont(name: "Gilroy-SemiBold", size: 12)
+                timeTitle.textColor = .orangeApp
+                self.addSubview(timeTitle)
+                timeTitle.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 20, paddingRight: 0, width: 30, height: 20)
+                
+                //timer run show
+            self.addSubview(self.timeRunTitle)
+            self.timeRunTitle.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 20, paddingLeft: 0, width: 30, height: 20)
+              
+
+                // Invoke callback every second
+                let interval = CMTime(seconds:1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+
+                // Queue on which to invoke the callback
+                let mainQueue = DispatchQueue.main
+
+                // Keep the reference to remove
+            var playerObserv = self.player?.addPeriodicTimeObserver(forInterval: interval, queue: mainQueue) { time in
+                    print(time.seconds)
+                    self.realTimeTrack = Int(time.seconds)
+                    playbackSlider.setValue(Float(time.seconds), animated: true)
+                }
+        }
+ 
+       
+        
+        
+        
+       
     }
     
     
@@ -200,4 +244,47 @@ class AudioPlayerView: UIView {
                 playButton.setImage(image, for: .normal)
             }
         }
+}
+
+
+extension String {
+    var isLatin: Bool {
+        let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ:/.?=%_ -1234567890()"
+        let lower = "abcdefghijklmnopqrstuvwxyz:/.?=%_ -1234567890()"
+
+        for c in self.map({ String($0) }) {
+            if !upper.contains(c) && !lower.contains(c) {
+                return false
+            }
+        }
+
+        return true
+    }
+
+    var isCyrillic: Bool {
+        let upper = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯ:/.?=%_ -1234567890()"
+        let lower = "абвгдежзийклмнопрстуфхцчшщьюя:/.?=%_ -1234567890()"
+
+        for c in self.map({ String($0) }) {
+            if !upper.contains(c) && !lower.contains(c) {
+                return false
+            }
+        }
+
+        return true
+    }
+
+    var isBothLatinAndCyrillic: Bool {
+        return self.isLatin && self.isCyrillic
+    }
+}
+extension String{
+    var encodeUrl : String
+    {
+        return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+    }
+    var decodeUrl : String
+    {
+        return self.removingPercentEncoding!
+    }
 }
